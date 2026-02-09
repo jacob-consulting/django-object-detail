@@ -33,6 +33,7 @@ FIELD_TYPE_MAP: dict[type[models.Field], str] = {
     models.OneToOneField: "foreignkey",
     models.ManyToManyField: "manytomany",
     models.ManyToManyRel: "manytomany",
+    models.OneToOneRel: "foreignkey",
     models.ManyToOneRel: "manytomany",
 }
 
@@ -101,7 +102,8 @@ def resolve_property(instance: models.Model, config: PropertyConfig) -> Resolved
             field_type = _get_field_type(field_obj)
 
             # Navigate into related models for FK/O2O
-            if isinstance(field_obj, (models.ForeignKey, models.OneToOneField)):
+            # OneToOneRel must be checked before ManyToOneRel (it's a subclass)
+            if isinstance(field_obj, (models.ForeignKey, models.OneToOneField, models.OneToOneRel)):
                 current_model = field_obj.related_model
             elif isinstance(field_obj, models.ManyToManyField):
                 is_many = True

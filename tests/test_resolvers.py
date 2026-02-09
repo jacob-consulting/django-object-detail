@@ -108,6 +108,21 @@ class TestResolvePropertyFKTraversal:
         rp = resolve_property(report, cfg)
         assert rp.value == "Some info text"
 
+    def test_reverse_o2o_is_not_many(self, info, report):
+        """Reverse OneToOneField should resolve as a single object, not a list."""
+        cfg = PropertyConfig(path="report")
+        rp = resolve_property(info, cfg)
+        assert rp.value == report
+        assert rp.type == "foreignkey"
+        assert rp.is_many is False
+
+    def test_reverse_o2o_traversal(self, info, report):
+        cfg = PropertyConfig(path="report__title")
+        rp = resolve_property(info, cfg)
+        assert rp.value == "Test Report"
+        assert rp.type == "char"
+        assert rp.is_many is False
+
     def test_deep_chain(self, report):
         cfg = PropertyConfig(path="info__create_dt")
         rp = resolve_property(report, cfg)
