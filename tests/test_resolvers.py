@@ -1,7 +1,7 @@
 import pytest
 from django.utils import timezone
 
-from django_object_detail.config import PropertyConfig, PropertyGroupConfig, x
+from django_object_detail.config import LinkConfig, PropertyConfig, PropertyGroupConfig, x
 from django_object_detail.resolvers import (
     ResolvedGroup,
     ResolvedProperty,
@@ -205,6 +205,51 @@ class TestResolvePropertyNullSafety:
         cfg = PropertyConfig(path="info__text")
         rp = resolve_property(report, cfg)
         assert rp.value is None
+
+
+class TestResolvePropertyLinkUrl:
+    def test_fk_auto_pk(self, report, user):
+        """FK value with string link shorthand auto-uses kwargs={"pk": pk}."""
+        cfg = x("owner", link="user-detail")
+        rp = resolve_property(report, cfg)
+        assert rp.link_url == f"/users/{user.pk}/"
+
+    def test_explicit_kwargs(self, report, user):
+        cfg = x("owner", link=LinkConfig(url="user-detail", kwargs={"pk": "pk"}))
+        rp = resolve_property(report, cfg)
+        assert rp.link_url == f"/users/{user.pk}/"
+
+    def test_explicit_args(self, report, user):
+        cfg = x("owner", link=LinkConfig(url="user-detail", args=["pk"]))
+        rp = resolve_property(report, cfg)
+        assert rp.link_url == f"/users/{user.pk}/"
+
+    def test_null_fk_returns_none(self, db):
+        report = Report.objects.create(title="No owner", owner=None, info=None)
+        cfg = x("owner", link="user-detail")
+        rp = resolve_property(report, cfg)
+        assert rp.link_url is None
+
+    def test_o2o_link(self, report, info):
+        cfg = x("info", link="info-detail")
+        rp = resolve_property(report, cfg)
+        assert rp.link_url == f"/info/{info.pk}/"
+
+    def test_no_link_config_returns_none(self, report):
+        cfg = PropertyConfig(path="owner")
+        rp = resolve_property(report, cfg)
+        assert rp.link_url is None
+
+    def test_bad_url_name_returns_none(self, report):
+        cfg = x("owner", link="nonexistent-url")
+        rp = resolve_property(report, cfg)
+        assert rp.link_url is None
+
+    def test_is_many_returns_none(self, report, user):
+        report.access_users.add(user)
+        cfg = x("access_users", link="user-detail")
+        rp = resolve_property(report, cfg)
+        assert rp.link_url is None
 
 
 class TestResolveGroup:

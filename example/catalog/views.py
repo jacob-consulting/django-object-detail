@@ -72,7 +72,7 @@ class BookDetailView(ObjectDetailMixin, DetailView):
             "icon": "building",
             "description": "Publishing house details",
             "properties": [
-                "publisher",
+                x("publisher", link="publisher-detail"),
                 x("publisher__website", title="Publisher Website"),
                 x("publisher__founded_year", title="Founded"),
             ],

@@ -202,3 +202,45 @@ class TestRenderPropertyValue:
         )
         html = tpl.render(Context({"prop": prop}))
         assert "anything" in html
+
+
+class TestRenderPropertyLink:
+    def test_link_rendered_as_anchor(self):
+        prop = ResolvedProperty(
+            path="t", label="Owner", value="testuser", type="char",
+            link_url="/users/1/",
+        )
+        tpl = Template(
+            "{% load object_detail %}{% render_property prop %}"
+        )
+        html = tpl.render(Context({"prop": prop}))
+        assert '<a href="/users/1/">' in html
+        assert "testuser" in html
+        assert "</a>" in html
+
+    def test_no_link_no_anchor(self):
+        prop = ResolvedProperty(
+            path="t", label="Owner", value="testuser", type="char",
+        )
+        tpl = Template(
+            "{% load object_detail %}{% render_property prop %}"
+        )
+        html = tpl.render(Context({"prop": prop}))
+        assert "<a " not in html
+        assert "testuser" in html
+
+    def test_link_wraps_value_not_label(self):
+        prop = ResolvedProperty(
+            path="t", label="Owner", value="testuser", type="char",
+            link_url="/users/1/",
+        )
+        tpl = Template(
+            "{% load object_detail %}{% render_property prop %}"
+        )
+        html = tpl.render(Context({"prop": prop}))
+        # The label should NOT be inside the <a> tag
+        anchor_start = html.index('<a href=')
+        anchor_end = html.index('</a>') + len('</a>')
+        anchor_html = html[anchor_start:anchor_end]
+        assert "Owner" not in anchor_html
+        assert "testuser" in anchor_html

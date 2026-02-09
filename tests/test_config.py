@@ -2,6 +2,7 @@ import pytest
 from pydantic import ValidationError
 
 from django_object_detail.config import (
+    LinkConfig,
     PropertyConfig,
     PropertyGroupConfig,
     parse_property_display,
@@ -117,3 +118,51 @@ class TestParsePropertyDisplay:
     def test_empty_list(self):
         groups = parse_property_display([])
         assert groups == []
+
+
+class TestLinkConfig:
+    def test_create_with_url_only(self):
+        lc = LinkConfig(url="report-detail")
+        assert lc.url == "report-detail"
+        assert lc.args is None
+        assert lc.kwargs is None
+
+    def test_create_with_kwargs(self):
+        lc = LinkConfig(url="report-detail", kwargs={"pk": "id"})
+        assert lc.kwargs == {"pk": "id"}
+
+    def test_create_with_args(self):
+        lc = LinkConfig(url="report-detail", args=["pk"])
+        assert lc.args == ["pk"]
+
+    def test_string_normalization_on_property_config(self):
+        cfg = PropertyConfig(path="owner", link="user-detail")
+        assert isinstance(cfg.link, LinkConfig)
+        assert cfg.link.url == "user-detail"
+        assert cfg.link.args is None
+        assert cfg.link.kwargs is None
+
+    def test_x_with_link_string(self):
+        cfg = x("owner", link="user-detail")
+        assert isinstance(cfg.link, LinkConfig)
+        assert cfg.link.url == "user-detail"
+
+    def test_x_with_link_config(self):
+        cfg = x("owner", link=LinkConfig(url="user-detail", kwargs={"pk": "id"}))
+        assert cfg.link.url == "user-detail"
+        assert cfg.link.kwargs == {"pk": "id"}
+
+    def test_dict_normalization_via_group(self):
+        group = PropertyGroupConfig(
+            title="Test",
+            properties=[
+                {"path": "owner", "link": "user-detail"},
+            ],
+        )
+        prop = group.properties[0]
+        assert isinstance(prop.link, LinkConfig)
+        assert prop.link.url == "user-detail"
+
+    def test_no_link_default(self):
+        cfg = PropertyConfig(path="title")
+        assert cfg.link is None

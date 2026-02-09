@@ -5,8 +5,9 @@ from typing import Any
 
 from django.core.exceptions import FieldDoesNotExist
 from django.db import models
+from django.urls import NoReverseMatch, reverse
 
-from django_object_detail.config import PropertyConfig, PropertyGroupConfig
+from django_object_detail.config import LinkConfig, PropertyConfig, PropertyGroupConfig
 
 FIELD_TYPE_MAP: dict[type[models.Field], str] = {
     models.CharField: "char",
@@ -47,6 +48,7 @@ class ResolvedProperty:
     type: str = "default"
     template: str | None = None
     is_many: bool = False
+    link_url: str | None = None
 
 
 @dataclass
@@ -63,6 +65,26 @@ def _get_field_type(field_obj: models.Field) -> str:
         if isinstance(field_obj, field_class):
             return type_name
     return "default"
+
+
+def _resolve_link_url(value: Any, link: LinkConfig | None, is_many: bool) -> str | None:
+    """Resolve a link URL for the property value."""
+    if link is None or value is None or is_many:
+        return None
+
+    try:
+        if link.args is not None:
+            args = [getattr(value, attr) for attr in link.args]
+            return reverse(link.url, args=args)
+        elif link.kwargs is not None:
+            kwargs = {k: getattr(value, attr) for k, attr in link.kwargs.items()}
+            return reverse(link.url, kwargs=kwargs)
+        elif isinstance(value, models.Model):
+            return reverse(link.url, kwargs={"pk": value.pk})
+        else:
+            return None
+    except (NoReverseMatch, AttributeError):
+        return None
 
 
 def resolve_property(instance: models.Model, config: PropertyConfig) -> ResolvedProperty:
@@ -124,6 +146,9 @@ def resolve_property(instance: models.Model, config: PropertyConfig) -> Resolved
     # Resolve the runtime value
     value = _resolve_value(instance, segments, is_many)
 
+    # Resolve link URL
+    link_url = _resolve_link_url(value, config.link, is_many)
+
     return ResolvedProperty(
         path=config.path,
         label=label,
@@ -132,6 +157,7 @@ def resolve_property(instance: models.Model, config: PropertyConfig) -> Resolved
         type=field_type,
         template=config.template,
         is_many=is_many,
+        link_url=link_url,
     )
 
 

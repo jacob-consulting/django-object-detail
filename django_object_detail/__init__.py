@@ -1,3 +1,3 @@
-from django_object_detail.config import PropertyConfig, PropertyGroupConfig, x
+from django_object_detail.config import LinkConfig, PropertyConfig, PropertyGroupConfig, x
 
-__all__ = ["PropertyConfig", "PropertyGroupConfig", "x"]
+__all__ = ["LinkConfig", "PropertyConfig", "PropertyGroupConfig", "x"]

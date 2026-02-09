@@ -5,6 +5,14 @@ from typing import Optional
 from pydantic import BaseModel, field_validator
 
 
+class LinkConfig(BaseModel):
+    """Configuration for linking a property value to a URL."""
+
+    url: str
+    args: Optional[list[str]] = None
+    kwargs: Optional[dict[str, str]] = None
+
+
 class PropertyConfig(BaseModel):
     """Configuration for a single property to display."""
 
@@ -13,6 +21,14 @@ class PropertyConfig(BaseModel):
     detail: Optional[str] = None
     type: Optional[str] = None
     template: Optional[str] = None
+    link: Optional[LinkConfig] = None
+
+    @field_validator("link", mode="before")
+    @classmethod
+    def normalize_link(cls, v):
+        if isinstance(v, str):
+            return LinkConfig(url=v)
+        return v
 
 
 class PropertyGroupConfig(BaseModel):
