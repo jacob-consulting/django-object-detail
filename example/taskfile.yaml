@@ -1,0 +1,20 @@
+version: "3"
+
+tasks:
+  install:
+    desc: Install Python dependencies
+    cmds:
+      - pip3 install django-bootstrap5
+
+  fixtures:
+    desc: Run migrations and load sample data
+    cmds:
+      - python manage.py migrate
+      - python manage.py makemigrations catalog
+      - python manage.py migrate catalog
+      - python manage.py loaddata catalog
+
+  run:
+    desc: Start the development server
+    cmds:
+      - python manage.py runserver
