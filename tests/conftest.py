@@ -1,5 +1,9 @@
+from pathlib import Path
+
 import django
 from django.conf import settings
+
+TESTS_DIR = Path(__file__).resolve().parent
 
 
 def pytest_configure():
@@ -19,6 +23,7 @@ def pytest_configure():
         TEMPLATES=[
             {
                 "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "DIRS": [TESTS_DIR / "templates"],
                 "APP_DIRS": True,
             }
         ],

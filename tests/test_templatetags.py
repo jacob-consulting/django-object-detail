@@ -184,14 +184,14 @@ class TestRenderPropertyValue:
 
     def test_custom_template(self):
         prop = ResolvedProperty(
-            path="t", label="T", value="val",
-            template="django_object_detail/types/char.html",
+            path="t", label="T", value="custom-test-value",
+            template="test_custom_value.html",
         )
         tpl = Template(
             "{% load object_detail %}{% render_property_value prop %}"
         )
         html = tpl.render(Context({"prop": prop}))
-        assert "val" in html
+        assert '<span class="custom-rendered">custom-test-value</span>' in html
 
     def test_default_fallback(self):
         prop = ResolvedProperty(

@@ -55,7 +55,7 @@ class BookDetailView(ObjectDetailMixin, DetailView):
                 "title",
                 x("pages", title="Page Count"),
                 "price",
-                "rating",
+                x("rating", template="catalog/star_rating.html"),
             ],
         },
         {
