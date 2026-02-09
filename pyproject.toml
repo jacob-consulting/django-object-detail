@@ -1,6 +1,22 @@
 [project]
-name = "django-object-view"
+name = "django-object-detail"
 version = "0.1.0"
 description = "Library to show Django object properties in groups with customizable templates with focus on bootstrap5"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "django>=4.2",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-django",
+]
+
+[tool.setuptools.packages.find]
+include = ["django_object_detail*"]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
