@@ -156,6 +156,20 @@ class TestResolvePropertyM2M:
         assert rp.value == []
 
 
+class TestResolvePropertyLabelCapitalization:
+    def test_verbose_name_capitalized(self, report):
+        """Auto-generated verbose_name (lowercase) should get first letter capitalized."""
+        cfg = PropertyConfig(path="owner")
+        rp = resolve_property(report, cfg)
+        assert rp.label == "Owner"
+
+    def test_explicit_verbose_name_preserved(self, report):
+        """Explicit verbose_name already starting uppercase should be unchanged."""
+        cfg = PropertyConfig(path="title")
+        rp = resolve_property(report, cfg)
+        assert rp.label == "Report title"
+
+
 class TestResolvePropertyOverrides:
     def test_title_override(self, report):
         cfg = x("title", title="Custom Title")

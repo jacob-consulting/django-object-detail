@@ -91,7 +91,8 @@ def resolve_property(instance: models.Model, config: PropertyConfig) -> Resolved
             # Extract metadata from the field
             verbose = getattr(field_obj, "verbose_name", None)
             if verbose:
-                label = str(verbose)
+                v = str(verbose)
+                label = v[0].upper() + v[1:]
             else:
                 label = segment.replace("_", " ").title()
 
