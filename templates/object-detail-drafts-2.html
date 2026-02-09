@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Detail - More Layout Suggestions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-bootstrap-fill fs-3 me-2 text-primary"></i>
+                <span class="fw-semibold">Bootstrap Design</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="object-detail-drafts-1.html">Object Detail</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Object Detail 2</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <h1 class="mb-2">Object Detail Layouts &mdash; Part 2</h1>
+        <p class="lead text-body-secondary mb-5">Four more layout suggestions for displaying grouped object properties.</p>
+
+        <!-- ============================================================ -->
+        <!-- SUGGESTION 5: Split left/right card                          -->
+        <!-- Left = group header + description, Right = properties        -->
+        <!-- ============================================================ -->
+        <section class="mb-5">
+            <h2 class="h4 border-bottom pb-2 mb-4">
+                <span class="badge bg-primary me-2">5</span>
+                Split Card &mdash; Left Header / Right Properties
+            </h2>
+            <p class="text-body-secondary mb-4">Each group is a card split into two columns. The left side contains the group title, description, and an icon. The right side lists all properties as label-value rows.</p>
+
+            <div id="suggestion-5">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 border-end mb-3 mb-md-0">
+                                <div class="pe-md-3">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="bi bi-info-circle-fill text-primary fs-5 me-2"></i>
+                                        <h5 class="card-title mb-0">General Information</h5>
+                                    </div>
+                                    <p class="text-body-secondary small mb-0">Basic identification and status of the instance. These fields are set at creation time and rarely change.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="ps-md-3">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">Name</div>
+                                        <div class="col-sm-8">web-prod-01</div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">Instance ID</div>
+                                        <div class="col-sm-8">
+                                            <code>i-0a1b2c3d4e5f67890</code>
+                                            <br><small class="text-body-tertiary">Unique identifier assigned at creation time.</small>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">Status</div>
+                                        <div class="col-sm-8">
+                                            <span class="badge text-bg-success">Running</span>
+                                            <br><small class="text-body-tertiary">Healthy for 47 days. Last restart: 2025-12-22.</small>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">Region</div>
+                                        <div class="col-sm-8">eu-west-1</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">Created</div>
+                                        <div class="col-sm-8">2024-03-15 09:42:00 UTC</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 border-end mb-3 mb-md-0">
+                                <div class="pe-md-3">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="bi bi-cpu-fill text-primary fs-5 me-2"></i>
+                                        <h5 class="card-title mb-0">Hardware Configuration</h5>
+                                    </div>
+                                    <p class="text-body-secondary small mb-0">Compute resources allocated to this instance. Changes require a restart.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="ps-md-3">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">Instance Type</div>
+                                        <div class="col-sm-8">
+                                            t3.large
+                                            <br><small class="text-body-tertiary">Burstable general-purpose. Baseline: 30% CPU.</small>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">vCPUs</div>
+                                        <div class="col-sm-8">2</div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">Memory</div>
+                                        <div class="col-sm-8">8 GiB</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">Storage</div>
+                                        <div class="col-sm-8">
+                                            100 GB SSD (gp3)
+                                            <br><small class="text-body-tertiary">IOPS: 3000 | Throughput: 125 MB/s | Encrypted (AES-256).</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 border-end mb-3 mb-md-0">
+                                <div class="pe-md-3">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="bi bi-hdd-network-fill text-primary fs-5 me-2"></i>
+                                        <h5 class="card-title mb-0">Network</h5>
+                                    </div>
+                                    <p class="text-body-secondary small mb-0">Network interfaces, addresses, and firewall rules attached to this instance.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="ps-md-3">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">Private IP</div>
+                                        <div class="col-sm-8"><code>10.0.1.42</code></div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">Public IP</div>
+                                        <div class="col-sm-8">
+                                            <code>54.78.123.45</code>
+                                            <br><small class="text-body-tertiary">Elastic IP. Persists across stop/start cycles.</small>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 text-body-secondary fw-medium">Security Groups</div>
+                                        <div class="col-sm-8">sg-web-prod, sg-default</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- ============================================================ -->
+        <!-- SUGGESTION 6: Accordion layout                               -->
+        <!-- Each group is a collapsible accordion item                   -->
+        <!-- ============================================================ -->
+        <section class="mb-5">
+            <h2 class="h4 border-bottom pb-2 mb-4">
+                <span class="badge bg-primary me-2">6</span>
+                Accordion &mdash; Collapsible Groups with Summary Badges
+            </h2>
+            <p class="text-body-secondary mb-4">Each group is an accordion item that can be expanded or collapsed. A badge in the header shows the property count. Annotations appear as muted text below values.</p>
+
+            <div id="suggestion-6">
+                <div class="accordion" id="accordionGroups">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseGeneral"
+                                    aria-expanded="true" aria-controls="collapseGeneral">
+                                <i class="bi bi-info-circle me-2"></i>
+                                General Information
+                                <span class="badge text-bg-secondary ms-2">5 properties</span>
+                            </button>
+                        </h2>
+                        <div id="collapseGeneral" class="accordion-collapse collapse show" data-bs-parent="#accordionGroups">
+                            <div class="accordion-body">
+                                <p class="text-body-secondary small mb-3">Basic identification and status of the instance.</p>
+                                <table class="table table-sm table-borderless mb-0">
+                                    <tbody>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium" style="width: 30%;">Name</th>
+                                            <td>web-prod-01</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium">Instance ID</th>
+                                            <td>
+                                                <code>i-0a1b2c3d4e5f67890</code>
+                                                <div class="text-body-tertiary small">Unique identifier assigned at creation time.</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium">Status</th>
+                                            <td>
+                                                <span class="badge text-bg-success">Running</span>
+                                                <div class="text-body-tertiary small">Healthy for 47 days. Last restart: 2025-12-22.</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium">Region</th>
+                                            <td>eu-west-1</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium">Created</th>
+                                            <td>2024-03-15 09:42:00 UTC</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseHardware"
+                                    aria-expanded="false" aria-controls="collapseHardware">
+                                <i class="bi bi-cpu me-2"></i>
+                                Hardware Configuration
+                                <span class="badge text-bg-secondary ms-2">4 properties</span>
+                            </button>
+                        </h2>
+                        <div id="collapseHardware" class="accordion-collapse collapse" data-bs-parent="#accordionGroups">
+                            <div class="accordion-body">
+                                <p class="text-body-secondary small mb-3">Compute resources allocated to this instance.</p>
+                                <table class="table table-sm table-borderless mb-0">
+                                    <tbody>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium" style="width: 30%;">Instance Type</th>
+                                            <td>
+                                                t3.large
+                                                <div class="text-body-tertiary small">Burstable general-purpose. Baseline: 30% CPU.</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium">vCPUs</th>
+                                            <td>2</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium">Memory</th>
+                                            <td>8 GiB</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium">Storage</th>
+                                            <td>
+                                                100 GB SSD (gp3)
+                                                <div class="text-body-tertiary small">IOPS: 3000 | Throughput: 125 MB/s | Encrypted (AES-256).</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseNetwork"
+                                    aria-expanded="false" aria-controls="collapseNetwork">
+                                <i class="bi bi-hdd-network me-2"></i>
+                                Network
+                                <span class="badge text-bg-secondary ms-2">3 properties</span>
+                            </button>
+                        </h2>
+                        <div id="collapseNetwork" class="accordion-collapse collapse" data-bs-parent="#accordionGroups">
+                            <div class="accordion-body">
+                                <table class="table table-sm table-borderless mb-0">
+                                    <tbody>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium" style="width: 30%;">Private IP</th>
+                                            <td><code>10.0.1.42</code></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium">Public IP</th>
+                                            <td>
+                                                <code>54.78.123.45</code>
+                                                <div class="text-body-tertiary small">Elastic IP. Persists across stop/start cycles.</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-body-secondary fw-medium">Security Groups</th>
+                                            <td>sg-web-prod, sg-default</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- ============================================================ -->
+        <!-- SUGGESTION 7: Tabbed groups                                  -->
+        <!-- Each group is a nav tab with properties in a definition list -->
+        <!-- ============================================================ -->
+        <section class="mb-5">
+            <h2 class="h4 border-bottom pb-2 mb-4">
+                <span class="badge bg-primary me-2">7</span>
+                Tabbed Groups &mdash; Vertical Tabs with Definition List
+            </h2>
+            <p class="text-body-secondary mb-4">Groups are presented as vertical nav pills on the left. Selecting a tab reveals the properties in a definition list on the right. Annotations shown as muted text after values.</p>
+
+            <div id="suggestion-7">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <button class="nav-link active text-start" id="v-pills-general-tab" data-bs-toggle="pill"
+                                            data-bs-target="#v-pills-general" type="button" role="tab"
+                                            aria-controls="v-pills-general" aria-selected="true">
+                                        <i class="bi bi-info-circle me-2"></i>General
+                                    </button>
+                                    <button class="nav-link text-start" id="v-pills-hardware-tab" data-bs-toggle="pill"
+                                            data-bs-target="#v-pills-hardware" type="button" role="tab"
+                                            aria-controls="v-pills-hardware" aria-selected="false">
+                                        <i class="bi bi-cpu me-2"></i>Hardware
+                                    </button>
+                                    <button class="nav-link text-start" id="v-pills-network-tab" data-bs-toggle="pill"
+                                            data-bs-target="#v-pills-network" type="button" role="tab"
+                                            aria-controls="v-pills-network" aria-selected="false">
+                                        <i class="bi bi-hdd-network me-2"></i>Network
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-9 border-start">
+                                <div class="tab-content ps-md-4" id="v-pills-tabContent">
+                                    <div class="tab-pane fade show active" id="v-pills-general" role="tabpanel" aria-labelledby="v-pills-general-tab">
+                                        <h5 class="mb-1">General Information</h5>
+                                        <p class="text-body-secondary small mb-3">Basic identification and status of the instance.</p>
+                                        <dl class="row mb-0">
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">Name</dt>
+                                            <dd class="col-sm-8">web-prod-01</dd>
+
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">Instance ID</dt>
+                                            <dd class="col-sm-8">
+                                                <code>i-0a1b2c3d4e5f67890</code>
+                                                <div class="text-body-tertiary small">Unique identifier assigned at creation time.</div>
+                                            </dd>
+
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">Status</dt>
+                                            <dd class="col-sm-8">
+                                                <span class="badge text-bg-success">Running</span>
+                                                <div class="text-body-tertiary small">Healthy for 47 days. Last restart: 2025-12-22.</div>
+                                            </dd>
+
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">Region</dt>
+                                            <dd class="col-sm-8">eu-west-1</dd>
+
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">Created</dt>
+                                            <dd class="col-sm-8 mb-0">2024-03-15 09:42:00 UTC</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-hardware" role="tabpanel" aria-labelledby="v-pills-hardware-tab">
+                                        <h5 class="mb-1">Hardware Configuration</h5>
+                                        <p class="text-body-secondary small mb-3">Compute resources allocated to this instance.</p>
+                                        <dl class="row mb-0">
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">Instance Type</dt>
+                                            <dd class="col-sm-8">
+                                                t3.large
+                                                <div class="text-body-tertiary small">Burstable general-purpose. Baseline: 30% CPU.</div>
+                                            </dd>
+
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">vCPUs</dt>
+                                            <dd class="col-sm-8">2</dd>
+
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">Memory</dt>
+                                            <dd class="col-sm-8">8 GiB</dd>
+
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">Storage</dt>
+                                            <dd class="col-sm-8 mb-0">
+                                                100 GB SSD (gp3)
+                                                <div class="text-body-tertiary small">IOPS: 3000 | Throughput: 125 MB/s | Encrypted (AES-256).</div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-network" role="tabpanel" aria-labelledby="v-pills-network-tab">
+                                        <h5 class="mb-1">Network</h5>
+                                        <p class="text-body-secondary small mb-3">Network interfaces, addresses, and firewall rules.</p>
+                                        <dl class="row mb-0">
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">Private IP</dt>
+                                            <dd class="col-sm-8"><code>10.0.1.42</code></dd>
+
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">Public IP</dt>
+                                            <dd class="col-sm-8">
+                                                <code>54.78.123.45</code>
+                                                <div class="text-body-tertiary small">Elastic IP. Persists across stop/start cycles.</div>
+                                            </dd>
+
+                                            <dt class="col-sm-4 text-body-secondary fw-medium">Security Groups</dt>
+                                            <dd class="col-sm-8 mb-0">sg-web-prod, sg-default</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- ============================================================ -->
+        <!-- SUGGESTION 8: Sidebar scrollspy with sections                -->
+        <!-- Sticky sidebar nav + scrollable property sections            -->
+        <!-- ============================================================ -->
+        <section class="mb-5">
+            <h2 class="h4 border-bottom pb-2 mb-4">
+                <span class="badge bg-primary me-2">8</span>
+                Striped Rows &mdash; Compact Grouped Sections with Alternating Rows
+            </h2>
+            <p class="text-body-secondary mb-4">Groups are separated by a bold header bar. Properties are displayed in alternating striped rows for readability. Annotations are shown inline as italic text.</p>
+
+            <div id="suggestion-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white d-flex align-items-center">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <h5 class="mb-0 text-white">General Information</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-striped table-hover mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="fw-medium ps-3" style="width: 30%;">Name</td>
+                                    <td>web-prod-01</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium ps-3">Instance ID</td>
+                                    <td>
+                                        <code>i-0a1b2c3d4e5f67890</code>
+                                        <span class="text-body-tertiary fst-italic ms-2">&mdash; Unique identifier assigned at creation time.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium ps-3">Status</td>
+                                    <td>
+                                        <span class="badge text-bg-success">Running</span>
+                                        <span class="text-body-tertiary fst-italic ms-2">&mdash; Healthy for 47 days.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium ps-3">Region</td>
+                                    <td>eu-west-1</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium ps-3">Created</td>
+                                    <td>2024-03-15 09:42:00 UTC</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header bg-primary text-white d-flex align-items-center">
+                        <i class="bi bi-cpu me-2"></i>
+                        <h5 class="mb-0 text-white">Hardware Configuration</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-striped table-hover mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="fw-medium ps-3" style="width: 30%;">Instance Type</td>
+                                    <td>
+                                        t3.large
+                                        <span class="text-body-tertiary fst-italic ms-2">&mdash; Burstable, baseline 30% CPU.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium ps-3">vCPUs</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium ps-3">Memory</td>
+                                    <td>8 GiB</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium ps-3">Storage</td>
+                                    <td>
+                                        100 GB SSD (gp3)
+                                        <span class="text-body-tertiary fst-italic ms-2">&mdash; IOPS: 3000 | 125 MB/s | Encrypted.</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header bg-primary text-white d-flex align-items-center">
+                        <i class="bi bi-hdd-network me-2"></i>
+                        <h5 class="mb-0 text-white">Network</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-striped table-hover mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="fw-medium ps-3" style="width: 30%;">Private IP</td>
+                                    <td><code>10.0.1.42</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium ps-3">Public IP</td>
+                                    <td>
+                                        <code>54.78.123.45</code>
+                                        <span class="text-body-tertiary fst-italic ms-2">&mdash; Elastic IP, persists across restarts.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium ps-3">Security Groups</td>
+                                    <td>sg-web-prod, sg-default</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

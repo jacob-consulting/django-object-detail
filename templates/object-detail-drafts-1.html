@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Detail - Layout Suggestions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-bootstrap-fill fs-3 me-2 text-primary"></i>
+                <span class="fw-semibold">Bootstrap Design</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Object Detail</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="object-detail-drafts-2.html">Object Detail 2</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <h1 class="mb-2">Object Detail Layouts</h1>
+        <p class="lead text-body-secondary mb-5">Four layout suggestions for displaying grouped object properties with labels, values, and annotations.</p>
+
+        <!-- ============================================================ -->
+        <!-- SUGGESTION 1: Cards with horizontal definition list           -->
+        <!-- Annotations shown as tooltip icons                            -->
+        <!-- ============================================================ -->
+        <section class="mb-5">
+            <h2 class="h4 border-bottom pb-2 mb-4">
+                <span class="badge bg-primary me-2">1</span>
+                Card Layout &mdash; Horizontal Rows with Tooltip Annotations
+            </h2>
+            <p class="text-body-secondary mb-4">Each group is a card. Properties are displayed as horizontal label-value pairs. Annotations are hidden behind an info icon tooltip.</p>
+
+            <div id="suggestion-1">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">General Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-body-secondary small mb-3">Basic identification and status of the instance.</p>
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">Name</div>
+                            <div class="col-sm-8">web-prod-01</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">Instance ID</div>
+                            <div class="col-sm-8">
+                                <code>i-0a1b2c3d4e5f67890</code>
+                                <i class="bi bi-info-circle text-muted ms-1" role="button" tabindex="0"
+                                   data-bs-toggle="tooltip" data-bs-title="Unique identifier assigned by the cloud provider at creation time."></i>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">Status</div>
+                            <div class="col-sm-8">
+                                <span class="badge text-bg-success">Running</span>
+                                <i class="bi bi-info-circle text-muted ms-1" role="button" tabindex="0"
+                                   data-bs-toggle="tooltip" data-bs-title="Instance has been healthy for 47 days. Last restart: 2025-12-22."></i>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">Region</div>
+                            <div class="col-sm-8">eu-west-1</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">Created</div>
+                            <div class="col-sm-8">2024-03-15 09:42:00 UTC</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Hardware Configuration</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-body-secondary small mb-3">Compute resources allocated to this instance.</p>
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">Instance Type</div>
+                            <div class="col-sm-8">
+                                t3.large
+                                <i class="bi bi-info-circle text-muted ms-1" role="button" tabindex="0"
+                                   data-bs-toggle="tooltip" data-bs-title="Burstable general-purpose instance. Baseline: 30% CPU, burstable to 100%."></i>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">vCPUs</div>
+                            <div class="col-sm-8">2</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">Memory</div>
+                            <div class="col-sm-8">8 GiB</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">Storage</div>
+                            <div class="col-sm-8">
+                                100 GB SSD (gp3)
+                                <i class="bi bi-info-circle text-muted ms-1" role="button" tabindex="0"
+                                   data-bs-toggle="tooltip" data-bs-title="Provisioned IOPS: 3000. Throughput: 125 MB/s. Encryption enabled (AES-256)."></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Network</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">Private IP</div>
+                            <div class="col-sm-8"><code>10.0.1.42</code></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">Public IP</div>
+                            <div class="col-sm-8">
+                                <code>54.78.123.45</code>
+                                <i class="bi bi-info-circle text-muted ms-1" role="button" tabindex="0"
+                                   data-bs-toggle="tooltip" data-bs-title="Elastic IP. Will persist across stop/start cycles."></i>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-body-secondary fw-medium">Security Groups</div>
+                            <div class="col-sm-8">sg-web-prod, sg-default</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- ============================================================ -->
+        <!-- SUGGESTION 2: Table-based layout inside cards                 -->
+        <!-- Annotations displayed inline as muted text below the value   -->
+        <!-- ============================================================ -->
+        <section class="mb-5">
+            <h2 class="h4 border-bottom pb-2 mb-4">
+                <span class="badge bg-primary me-2">2</span>
+                Table Layout &mdash; Inline Annotations Below Values
+            </h2>
+            <p class="text-body-secondary mb-4">Groups use a borderless table for alignment. Annotations are shown directly as small muted text beneath the value.</p>
+
+            <div id="suggestion-2">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title mb-1">General Information</h5>
+                        <small class="text-body-secondary">Basic identification and status of the instance.</small>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3" style="width: 35%;">Name</th>
+                                    <td class="pe-3">web-prod-01</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3">Instance ID</th>
+                                    <td class="pe-3">
+                                        <code>i-0a1b2c3d4e5f67890</code>
+                                        <br><small class="text-body-tertiary">Unique identifier assigned by the cloud provider at creation time.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3">Status</th>
+                                    <td class="pe-3">
+                                        <span class="badge text-bg-success">Running</span>
+                                        <br><small class="text-body-tertiary">Healthy for 47 days. Last restart: 2025-12-22.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3">Region</th>
+                                    <td class="pe-3">eu-west-1</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3">Created</th>
+                                    <td class="pe-3">2024-03-15 09:42:00 UTC</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title mb-1">Hardware Configuration</h5>
+                        <small class="text-body-secondary">Compute resources allocated to this instance.</small>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3" style="width: 35%;">Instance Type</th>
+                                    <td class="pe-3">
+                                        t3.large
+                                        <br><small class="text-body-tertiary">Burstable general-purpose. Baseline: 30% CPU, burstable to 100%.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3">vCPUs</th>
+                                    <td class="pe-3">2</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3">Memory</th>
+                                    <td class="pe-3">8 GiB</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3">Storage</th>
+                                    <td class="pe-3">
+                                        100 GB SSD (gp3)
+                                        <br><small class="text-body-tertiary">IOPS: 3000 | Throughput: 125 MB/s | Encrypted (AES-256).</small>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Network</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3" style="width: 35%;">Private IP</th>
+                                    <td class="pe-3"><code>10.0.1.42</code></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3">Public IP</th>
+                                    <td class="pe-3">
+                                        <code>54.78.123.45</code>
+                                        <br><small class="text-body-tertiary">Elastic IP. Persists across stop/start cycles.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="text-body-secondary fw-medium ps-3">Security Groups</th>
+                                    <td class="pe-3">sg-web-prod, sg-default</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- ============================================================ -->
+        <!-- SUGGESTION 3: Two-column grid of stacked label/value pairs   -->
+        <!-- Annotations as collapsible text via chevron icon              -->
+        <!-- ============================================================ -->
+        <section class="mb-5">
+            <h2 class="h4 border-bottom pb-2 mb-4">
+                <span class="badge bg-primary me-2">3</span>
+                Two-Column Grid &mdash; Stacked Labels with Collapsible Annotations
+            </h2>
+            <p class="text-body-secondary mb-4">Properties are shown as stacked label-over-value blocks in a two-column grid. Annotations are revealed by clicking a chevron toggle.</p>
+
+            <div id="suggestion-3">
+                <div class="mb-4">
+                    <h5 class="mb-1">General Information</h5>
+                    <p class="text-body-secondary small mb-3">Basic identification and status of the instance.</p>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="text-body-secondary small fw-medium text-uppercase mb-1">Name</div>
+                                <div class="fw-semibold">web-prod-01</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="text-body-secondary small fw-medium text-uppercase mb-1">Instance ID</div>
+                                        <div class="fw-semibold"><code>i-0a1b2c3d4e5f67890</code></div>
+                                    </div>
+                                    <button class="btn btn-sm btn-link text-muted p-0 ms-2" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#s3-annotation-id"
+                                            aria-expanded="false" aria-controls="s3-annotation-id"
+                                            aria-label="Toggle annotation">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </button>
+                                </div>
+                                <div class="collapse" id="s3-annotation-id">
+                                    <small class="text-body-tertiary d-block mt-2">Unique identifier assigned by the cloud provider at creation time.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="text-body-secondary small fw-medium text-uppercase mb-1">Status</div>
+                                        <div><span class="badge text-bg-success">Running</span></div>
+                                    </div>
+                                    <button class="btn btn-sm btn-link text-muted p-0 ms-2" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#s3-annotation-status"
+                                            aria-expanded="false" aria-controls="s3-annotation-status"
+                                            aria-label="Toggle annotation">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </button>
+                                </div>
+                                <div class="collapse" id="s3-annotation-status">
+                                    <small class="text-body-tertiary d-block mt-2">Healthy for 47 days. Last restart: 2025-12-22.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="text-body-secondary small fw-medium text-uppercase mb-1">Region</div>
+                                <div class="fw-semibold">eu-west-1</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="text-body-secondary small fw-medium text-uppercase mb-1">Created</div>
+                                <div class="fw-semibold">2024-03-15 09:42:00 UTC</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="mb-1">Hardware Configuration</h5>
+                    <p class="text-body-secondary small mb-3">Compute resources allocated to this instance.</p>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="text-body-secondary small fw-medium text-uppercase mb-1">Instance Type</div>
+                                        <div class="fw-semibold">t3.large</div>
+                                    </div>
+                                    <button class="btn btn-sm btn-link text-muted p-0 ms-2" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#s3-annotation-type"
+                                            aria-expanded="false" aria-controls="s3-annotation-type"
+                                            aria-label="Toggle annotation">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </button>
+                                </div>
+                                <div class="collapse" id="s3-annotation-type">
+                                    <small class="text-body-tertiary d-block mt-2">Burstable general-purpose. Baseline: 30% CPU, burstable to 100%.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="text-body-secondary small fw-medium text-uppercase mb-1">vCPUs</div>
+                                <div class="fw-semibold">2</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="text-body-secondary small fw-medium text-uppercase mb-1">Memory</div>
+                                <div class="fw-semibold">8 GiB</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="text-body-secondary small fw-medium text-uppercase mb-1">Storage</div>
+                                        <div class="fw-semibold">100 GB SSD (gp3)</div>
+                                    </div>
+                                    <button class="btn btn-sm btn-link text-muted p-0 ms-2" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#s3-annotation-storage"
+                                            aria-expanded="false" aria-controls="s3-annotation-storage"
+                                            aria-label="Toggle annotation">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </button>
+                                </div>
+                                <div class="collapse" id="s3-annotation-storage">
+                                    <small class="text-body-tertiary d-block mt-2">IOPS: 3000 | Throughput: 125 MB/s | Encrypted (AES-256).</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="mb-0">Network</h5>
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="text-body-secondary small fw-medium text-uppercase mb-1">Private IP</div>
+                                <div class="fw-semibold"><code>10.0.1.42</code></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="text-body-secondary small fw-medium text-uppercase mb-1">Public IP</div>
+                                        <div class="fw-semibold"><code>54.78.123.45</code></div>
+                                    </div>
+                                    <button class="btn btn-sm btn-link text-muted p-0 ms-2" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#s3-annotation-pip"
+                                            aria-expanded="false" aria-controls="s3-annotation-pip"
+                                            aria-label="Toggle annotation">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </button>
+                                </div>
+                                <div class="collapse" id="s3-annotation-pip">
+                                    <small class="text-body-tertiary d-block mt-2">Elastic IP. Persists across stop/start cycles.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-body-secondary rounded p-3">
+                                <div class="text-body-secondary small fw-medium text-uppercase mb-1">Security Groups</div>
+                                <div class="fw-semibold">sg-web-prod, sg-default</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- ============================================================ -->
+        <!-- SUGGESTION 4: List group with bordered sections               -->
+        <!-- Annotations displayed inline via a distinct annotation column -->
+        <!-- ============================================================ -->
+        <section class="mb-5">
+            <h2 class="h4 border-bottom pb-2 mb-4">
+                <span class="badge bg-primary me-2">4</span>
+                List Group Layout &mdash; Three-Column with Dedicated Annotation Column
+            </h2>
+            <p class="text-body-secondary mb-4">Uses Bootstrap list groups. Each row has a label, value, and a third column for the annotation text, giving all three elements equal visual weight.</p>
+
+            <div id="suggestion-4">
+                <div class="mb-4">
+                    <div class="card">
+                        <div class="card-body pb-0">
+                            <h5 class="card-title mb-1">General Information</h5>
+                            <p class="card-text text-body-secondary small">Basic identification and status of the instance.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">Name</div>
+                                    <div class="col-sm-4 fw-semibold">web-prod-01</div>
+                                    <div class="col-sm-5 text-body-tertiary small"></div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">Instance ID</div>
+                                    <div class="col-sm-4 fw-semibold"><code>i-0a1b2c3d4e5f67890</code></div>
+                                    <div class="col-sm-5 text-body-tertiary small">
+                                        <i class="bi bi-journal-text me-1"></i>Unique identifier assigned at creation time.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">Status</div>
+                                    <div class="col-sm-4"><span class="badge text-bg-success">Running</span></div>
+                                    <div class="col-sm-5 text-body-tertiary small">
+                                        <i class="bi bi-journal-text me-1"></i>Healthy for 47 days. Last restart: 2025-12-22.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">Region</div>
+                                    <div class="col-sm-4 fw-semibold">eu-west-1</div>
+                                    <div class="col-sm-5 text-body-tertiary small"></div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">Created</div>
+                                    <div class="col-sm-4 fw-semibold">2024-03-15 09:42:00 UTC</div>
+                                    <div class="col-sm-5 text-body-tertiary small"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="card">
+                        <div class="card-body pb-0">
+                            <h5 class="card-title mb-1">Hardware Configuration</h5>
+                            <p class="card-text text-body-secondary small">Compute resources allocated to this instance.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">Instance Type</div>
+                                    <div class="col-sm-4 fw-semibold">t3.large</div>
+                                    <div class="col-sm-5 text-body-tertiary small">
+                                        <i class="bi bi-journal-text me-1"></i>Burstable general-purpose. Baseline: 30% CPU.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">vCPUs</div>
+                                    <div class="col-sm-4 fw-semibold">2</div>
+                                    <div class="col-sm-5 text-body-tertiary small"></div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">Memory</div>
+                                    <div class="col-sm-4 fw-semibold">8 GiB</div>
+                                    <div class="col-sm-5 text-body-tertiary small"></div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">Storage</div>
+                                    <div class="col-sm-4 fw-semibold">100 GB SSD (gp3)</div>
+                                    <div class="col-sm-5 text-body-tertiary small">
+                                        <i class="bi bi-journal-text me-1"></i>IOPS: 3000 | Throughput: 125 MB/s | Encrypted.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="card">
+                        <div class="card-body pb-0">
+                            <h5 class="card-title mb-0">Network</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">Private IP</div>
+                                    <div class="col-sm-4 fw-semibold"><code>10.0.1.42</code></div>
+                                    <div class="col-sm-5 text-body-tertiary small"></div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">Public IP</div>
+                                    <div class="col-sm-4 fw-semibold"><code>54.78.123.45</code></div>
+                                    <div class="col-sm-5 text-body-tertiary small">
+                                        <i class="bi bi-journal-text me-1"></i>Elastic IP. Persists across stop/start cycles.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3 text-body-secondary fw-medium">Security Groups</div>
+                                    <div class="col-sm-4 fw-semibold">sg-web-prod, sg-default</div>
+                                    <div class="col-sm-5 text-body-tertiary small"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize all tooltips (used by Suggestion 1)
+        document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (el) {
+            new bootstrap.Tooltip(el);
+        });
+    </script>
+</body>
+</html>
