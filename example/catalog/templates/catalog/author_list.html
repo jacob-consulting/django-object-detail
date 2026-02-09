@@ -1,0 +1,36 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}Authors - Bookshop{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Authors</h1>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+    {% for author in authors %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{% url 'author-detail' author.pk %}" class="text-decoration-none">
+                        {{ author.get_full_name }}
+                    </a>
+                </h5>
+                {% if author.date_of_birth %}
+                <p class="card-text text-muted small">
+                    <i class="bi bi-calendar me-1"></i>{{ author.date_of_birth }}
+                </p>
+                {% endif %}
+                {% if author.biography %}
+                <p class="card-text">{{ author.biography|truncatewords:20 }}</p>
+                {% endif %}
+            </div>
+            <div class="card-footer bg-transparent">
+                <small class="text-muted">{{ author.book_count }} book{{ author.book_count|pluralize }}</small>
+                {% if author.is_featured %}
+                <span class="badge bg-warning text-dark float-end">Featured</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

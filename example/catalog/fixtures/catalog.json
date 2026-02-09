@@ -1,0 +1,232 @@
+[
+    {
+        "model": "catalog.genre",
+        "pk": 1,
+        "fields": {"name": "Fiction", "slug": "fiction"}
+    },
+    {
+        "model": "catalog.genre",
+        "pk": 2,
+        "fields": {"name": "Science Fiction", "slug": "science-fiction"}
+    },
+    {
+        "model": "catalog.genre",
+        "pk": 3,
+        "fields": {"name": "Fantasy", "slug": "fantasy"}
+    },
+    {
+        "model": "catalog.genre",
+        "pk": 4,
+        "fields": {"name": "Non-Fiction", "slug": "non-fiction"}
+    },
+    {
+        "model": "catalog.genre",
+        "pk": 5,
+        "fields": {"name": "Mystery", "slug": "mystery"}
+    },
+
+    {
+        "model": "catalog.publisher",
+        "pk": 1,
+        "fields": {
+            "name": "Penguin Random House",
+            "website": "https://www.penguinrandomhouse.com",
+            "founded_year": 1927,
+            "is_active": true,
+            "description": "Penguin Random House is the international home to nearly 250 editorially and creatively independent publishing imprints."
+        }
+    },
+    {
+        "model": "catalog.publisher",
+        "pk": 2,
+        "fields": {
+            "name": "HarperCollins",
+            "website": "https://www.harpercollins.com",
+            "founded_year": 1989,
+            "is_active": true,
+            "description": "HarperCollins Publishers is one of the world's largest publishing companies."
+        }
+    },
+    {
+        "model": "catalog.publisher",
+        "pk": 3,
+        "fields": {
+            "name": "Tor Books",
+            "website": "https://www.tor.com",
+            "founded_year": 1980,
+            "is_active": true,
+            "description": "Tor Books is a major publisher of science fiction and fantasy."
+        }
+    },
+
+    {
+        "model": "catalog.publisheraddress",
+        "pk": 1,
+        "fields": {
+            "publisher": 1,
+            "street": "1745 Broadway",
+            "city": "New York",
+            "country": "United States"
+        }
+    },
+    {
+        "model": "catalog.publisheraddress",
+        "pk": 2,
+        "fields": {
+            "publisher": 2,
+            "street": "195 Broadway",
+            "city": "New York",
+            "country": "United States"
+        }
+    },
+    {
+        "model": "catalog.publisheraddress",
+        "pk": 3,
+        "fields": {
+            "publisher": 3,
+            "street": "120 Broadway",
+            "city": "New York",
+            "country": "United States"
+        }
+    },
+
+    {
+        "model": "catalog.author",
+        "pk": 1,
+        "fields": {
+            "first_name": "Ursula",
+            "last_name": "Le Guin",
+            "date_of_birth": "1929-10-21",
+            "biography": "Ursula Kroeber Le Guin was an American author best known for her works of speculative fiction, including science fiction and fantasy. She was widely recognized as a master of the craft, writing both poetry and prose.",
+            "is_featured": true,
+            "website": "https://www.ursulakleguin.com"
+        }
+    },
+    {
+        "model": "catalog.author",
+        "pk": 2,
+        "fields": {
+            "first_name": "Neil",
+            "last_name": "Gaiman",
+            "date_of_birth": "1960-11-10",
+            "biography": "Neil Richard MacKinnon Gaiman is an English author of short fiction, novels, comic books, graphic novels, nonfiction, audio theatre, and films.",
+            "is_featured": true,
+            "website": "https://www.neilgaiman.com"
+        }
+    },
+    {
+        "model": "catalog.author",
+        "pk": 3,
+        "fields": {
+            "first_name": "Terry",
+            "last_name": "Pratchett",
+            "date_of_birth": "1948-04-28",
+            "biography": "Sir Terence David John Pratchett was an English humorist, satirist, and author of fantasy novels, especially comedic works. He was best known for his Discworld series of 41 novels.",
+            "is_featured": false,
+            "website": ""
+        }
+    },
+    {
+        "model": "catalog.author",
+        "pk": 4,
+        "fields": {
+            "first_name": "Agatha",
+            "last_name": "Christie",
+            "date_of_birth": "1890-09-15",
+            "biography": "Dame Agatha Mary Clarissa Christie was an English writer known for her 66 detective novels and 14 short story collections, particularly those revolving around fictional detectives Hercule Poirot and Miss Marple.",
+            "is_featured": false,
+            "website": ""
+        }
+    },
+
+    {
+        "model": "catalog.book",
+        "pk": 1,
+        "fields": {
+            "title": "A Wizard of Earthsea",
+            "summary": "A young boy named Ged discovers he has great magical power and enters a school of wizardry. In his pride, he releases a terrible shadow into the world that he must confront.",
+            "price": "14.99",
+            "rating": 4.6,
+            "pages": 183,
+            "is_available": true,
+            "publication_date": "1968-11-01",
+            "created_at": "2025-01-15T10:30:00Z",
+            "updated_at": "2025-01-15T10:30:00Z",
+            "publisher": 1,
+            "authors": [1],
+            "genres": [1, 3]
+        }
+    },
+    {
+        "model": "catalog.book",
+        "pk": 2,
+        "fields": {
+            "title": "Good Omens",
+            "summary": "The world is going to end next Saturday, and an angel and a demon who have grown rather fond of Earth team up to prevent the apocalypse.",
+            "price": "16.99",
+            "rating": 4.7,
+            "pages": 400,
+            "is_available": true,
+            "publication_date": "1990-05-10",
+            "created_at": "2025-01-16T14:00:00Z",
+            "updated_at": "2025-01-16T14:00:00Z",
+            "publisher": 2,
+            "authors": [2, 3],
+            "genres": [1, 3]
+        }
+    },
+    {
+        "model": "catalog.book",
+        "pk": 3,
+        "fields": {
+            "title": "The Left Hand of Darkness",
+            "summary": "A lone human ambassador is sent to the icy planet of Gethen, whose inhabitants can change their gender. A story of betrayal and politics on an alien world.",
+            "price": "15.99",
+            "rating": 4.5,
+            "pages": 304,
+            "is_available": true,
+            "publication_date": "1969-03-01",
+            "created_at": "2025-01-17T09:15:00Z",
+            "updated_at": "2025-01-17T09:15:00Z",
+            "publisher": 1,
+            "authors": [1],
+            "genres": [1, 2]
+        }
+    },
+    {
+        "model": "catalog.book",
+        "pk": 4,
+        "fields": {
+            "title": "Murder on the Orient Express",
+            "summary": "After a snowstorm stops the Orient Express in its tracks, a passenger is found murdered. Detective Hercule Poirot must identify the killer among the stranded passengers.",
+            "price": "12.99",
+            "rating": 4.4,
+            "pages": 274,
+            "is_available": false,
+            "publication_date": "1934-01-01",
+            "created_at": "2025-01-18T11:45:00Z",
+            "updated_at": "2025-01-18T11:45:00Z",
+            "publisher": 2,
+            "authors": [4],
+            "genres": [1, 5]
+        }
+    },
+    {
+        "model": "catalog.book",
+        "pk": 5,
+        "fields": {
+            "title": "American Gods",
+            "summary": "A recently released convict named Shadow Moon discovers that the gods of ancient mythology are alive and living in America, preparing for an epic battle.",
+            "price": "17.99",
+            "rating": 4.3,
+            "pages": 465,
+            "is_available": true,
+            "publication_date": "2001-06-19",
+            "created_at": "2025-01-19T16:20:00Z",
+            "updated_at": "2025-01-19T16:20:00Z",
+            "publisher": 3,
+            "authors": [2],
+            "genres": [1, 3]
+        }
+    }
+]

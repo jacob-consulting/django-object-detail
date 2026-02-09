@@ -1,0 +1,36 @@
+{% extends "catalog/base.html" %}
+{% load object_detail %}
+
+{% block title %}{{ publisher.name }} - Bookshop{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'publisher-list' %}">Publishers</a></li>
+        <li class="breadcrumb-item active">{{ publisher.name }}</li>
+    </ol>
+</nav>
+
+<h1 class="mb-4">{{ publisher.name }}</h1>
+
+{% render_object_detail publisher groups=object_detail_groups %}
+
+<h3 class="mt-4">Books by {{ publisher.name }}</h3>
+{% if publisher.books.all %}
+<ul class="list-group mb-3">
+    {% for book in publisher.books.all %}
+    <li class="list-group-item">
+        <a href="{% url 'book-detail' book.pk %}">{{ book.title }}</a>
+        <span class="float-end text-muted">${{ book.price }}</span>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="text-muted">No books found.</p>
+{% endif %}
+
+<a href="{% url 'publisher-list' %}" class="btn btn-outline-secondary mt-2">
+    <i class="bi bi-arrow-left me-1"></i> Back to Publishers
+</a>
+{% endblock %}

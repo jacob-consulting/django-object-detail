@@ -1,0 +1,27 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}Publishers - Bookshop{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Publishers</h1>
+<ul class="list-group">
+    {% for publisher in publishers %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+            <a href="{% url 'publisher-detail' publisher.pk %}" class="text-decoration-none fw-bold">
+                {{ publisher.name }}
+            </a>
+            <br>
+            <small class="text-muted">Founded {{ publisher.founded_year }}</small>
+        </div>
+        <div>
+            {% if publisher.is_active %}
+            <span class="badge bg-success rounded-pill">Active</span>
+            {% else %}
+            <span class="badge bg-secondary rounded-pill">Inactive</span>
+            {% endif %}
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
