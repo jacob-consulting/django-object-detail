@@ -1,28 +1,10 @@
-# django-object-detail
+# Django Object Detail
 
 Display Django model instances in grouped, Bootstrap 5 layouts with a declarative configuration.
 
 Define which fields to show, how to group them, and pick a layout — `django-object-detail` handles type detection, value resolution (including FK/M2M traversal), and rendering.
 
-## Screenshots
-
-<!-- TODO: Add actual screenshots from the example project -->
-
-### Split Card (default)
-
-![split-card](docs/screenshots/split-card.png)
-
-### Accordion
-
-![accordion](docs/screenshots/accordion.png)
-
-### Tabs (vertical)
-
-![tabs-vertical](docs/screenshots/tabs-vertical.png)
-
-## Quick Start
-
-Install the package:
+## Installation
 
 ```bash
 pip install django-object-detail
@@ -36,6 +18,8 @@ INSTALLED_APPS = [
     "django_object_detail",
 ]
 ```
+
+## Quick Start
 
 Use the mixin in your view:
 
@@ -65,6 +49,11 @@ Render it in your template:
 {% render_object_detail object object_detail_groups %}
 ```
 
-## Documentation
+That's it — fields are auto-detected, labels are derived from `verbose_name`, and the default `split-card` layout is applied.
 
-Full documentation is available at [Read the Docs](https://django-object-detail.readthedocs.io/).
+## Next Steps
+
+- [Configuration](getting_started/configuration.md) — property paths, the `x()` helper, and groups
+- [Links](getting_started/links.md) — make property values clickable
+- [Badges](getting_started/badges.md) — render values as Bootstrap badges
+- [Layout Packs](getting_started/layout_packs.md) — choose from 7 built-in layouts

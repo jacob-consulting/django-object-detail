@@ -1,0 +1,9 @@
+site_name: Django Object Detail
+repo_url: https://github.com/jacob-consulting/django-object-detail
+
+theme:
+  name: readthedocs
+
+plugins:
+  - search
+  - awesome-pages
