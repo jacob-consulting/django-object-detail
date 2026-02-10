@@ -10,6 +10,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+    "nox",
     "pytest",
     "pytest-django",
 ]

@@ -2,6 +2,11 @@ version: '3'
 
 tasks:
 
+  test:
+    cmds:
+      - nox
+    silent: true
+
   docs:
     cmds:
       - mkdocs serve -a localhost:8001
