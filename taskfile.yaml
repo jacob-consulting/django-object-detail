@@ -1,34 +1,6 @@
 version: '3'
 
-vars:
-  PYTHON: "3.12"
-
 tasks:
-
-  dev:
-    cmds:
-      - task: dev-venv
-      - task: dev-install
-
-  dev-venv:
-    cmds:
-      - uv venv --python={{ .PYTHON }} --clear
-    silent: true
-
-  dev-install:
-    cmds:
-      - uv pip install --upgrade .[bootstrap5,polymorphic,dev,test]
-    silent: true
-
-  dev-install-minimal:
-    cmds:
-      - uv pip install --upgrade .[minimal,bootstrap5minimal,polymorphic,dev,test]
-    silent: true
-
-  build:
-    cmds:
-      - uv build
-    silent: true
 
   docs:
     cmds:
@@ -39,15 +11,4 @@ tasks:
     cmds:
       - find . -type d -name "__pycache__" -exec rm -r {} +
       - rm -rf .nox dist
-    silent: true
-
-  bump-patch:
-    cmds:
-      - bumpver update --patch --no-fetch
-    silent: true
-
-  test:
-    cmds:
-      - uv run nox
-      - rm -rf .nox
     silent: true
