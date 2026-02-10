@@ -2,7 +2,7 @@
 name = "django-object-detail"
 version = "0.1.0"
 description = "Library to show Django object properties in groups with customizable templates with focus on bootstrap5"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "django>=4.2",
     "pydantic>=2.0",
