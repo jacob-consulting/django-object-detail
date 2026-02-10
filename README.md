@@ -2,6 +2,9 @@
 
 ![Tests](https://github.com/jacob-consulting/django-object-detail/actions/workflows/tests.yml/badge.svg)
 ![Coverage](https://codecov.io/gh/jacob-consulting/django-object-detail/branch/main/graph/badge.svg)
+![PyPI](https://img.shields.io/pypi/v/django-object-detail)
+![License](https://img.shields.io/pypi/l/django-object-detail)
+![Docs](https://readthedocs.org/projects/django-object-detail/badge/?version=latest)
 
 Display Django model instances in grouped, Bootstrap 5 layouts with a declarative configuration.
 
