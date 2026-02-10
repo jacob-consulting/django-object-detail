@@ -1,5 +1,7 @@
 import pytest
 from django.utils import timezone
+from django.utils.functional import Promise
+from django.utils.translation import gettext_lazy as _
 
 from django_object_detail.config import LinkConfig, PropertyConfig, PropertyGroupConfig, x
 from django_object_detail.resolvers import (
@@ -278,3 +280,31 @@ class TestResolveAll:
         assert len(groups) == 2
         assert groups[0].title == "G1"
         assert groups[1].title == "G2"
+
+
+class TestLazyStringResolution:
+    """Lazy translation strings should pass through config into resolved objects."""
+
+    def test_title_override_stays_lazy(self, report):
+        cfg = x("title", title=_("Custom Title"))
+        rp = resolve_property(report, cfg)
+        assert isinstance(rp.label, Promise)
+        assert str(rp.label) == "Custom Title"
+
+    def test_detail_override_stays_lazy(self, report):
+        cfg = x("title", detail=_("Custom detail"))
+        rp = resolve_property(report, cfg)
+        assert isinstance(rp.detail, Promise)
+        assert str(rp.detail) == "Custom detail"
+
+    def test_group_title_stays_lazy(self, report):
+        cfg = PropertyGroupConfig(
+            title=_("Report Info"),
+            description=_("Details about the report"),
+            properties=["title"],
+        )
+        rg = resolve_group(report, cfg)
+        assert isinstance(rg.title, Promise)
+        assert isinstance(rg.description, Promise)
+        assert str(rg.title) == "Report Info"
+        assert str(rg.description) == "Details about the report"

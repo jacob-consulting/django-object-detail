@@ -1,4 +1,6 @@
 import pytest
+from django.utils.functional import Promise
+from django.utils.translation import gettext_lazy as _
 from pydantic import ValidationError
 
 from django_object_detail.config import (
@@ -166,3 +168,56 @@ class TestLinkConfig:
     def test_no_link_default(self):
         cfg = PropertyConfig(path="title")
         assert cfg.link is None
+
+
+class TestLazyStringSupport:
+    """Lazy translation strings should pass through Pydantic without being evaluated."""
+
+    def test_property_config_title_stays_lazy(self):
+        cfg = PropertyConfig(path="title", title=_("Custom Title"))
+        assert isinstance(cfg.title, Promise)
+        assert str(cfg.title) == "Custom Title"
+
+    def test_property_config_detail_stays_lazy(self):
+        cfg = PropertyConfig(path="title", detail=_("Some detail"))
+        assert isinstance(cfg.detail, Promise)
+        assert str(cfg.detail) == "Some detail"
+
+    def test_group_title_stays_lazy(self):
+        group = PropertyGroupConfig(title=_("Group Title"), properties=["title"])
+        assert isinstance(group.title, Promise)
+        assert str(group.title) == "Group Title"
+
+    def test_group_description_stays_lazy(self):
+        group = PropertyGroupConfig(
+            title="Test",
+            description=_("A description"),
+            properties=["title"],
+        )
+        assert isinstance(group.description, Promise)
+        assert str(group.description) == "A description"
+
+    def test_x_helper_with_lazy_title(self):
+        cfg = x("title", title=_("Lazy Title"))
+        assert isinstance(cfg.title, Promise)
+
+    def test_parse_property_display_with_lazy(self):
+        raw = [
+            {
+                "title": _("Report"),
+                "description": _("Report details"),
+                "properties": ["title"],
+            },
+        ]
+        groups = parse_property_display(raw)
+        assert isinstance(groups[0].title, Promise)
+        assert isinstance(groups[0].description, Promise)
+
+    def test_plain_strings_still_work(self):
+        cfg = PropertyConfig(path="title", title="Plain", detail="Also plain")
+        assert cfg.title == "Plain"
+        assert cfg.detail == "Also plain"
+
+    def test_invalid_type_rejected(self):
+        with pytest.raises(ValidationError):
+            PropertyConfig(path="title", title=123)

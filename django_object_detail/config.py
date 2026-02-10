@@ -1,8 +1,20 @@
 from __future__ import annotations
 
-from typing import Optional
+from typing import Annotated, Any, Optional
 
+from django.utils.functional import Promise
 from pydantic import BaseModel, field_validator
+from pydantic.functional_validators import PlainValidator
+
+
+def _validate_lazy_str(v: Any) -> str | Promise:
+    """Accept plain strings and Django lazy translation strings without coercion."""
+    if isinstance(v, (str, Promise)):
+        return v
+    raise ValueError(f"Expected str or lazy string, got {type(v)}")
+
+
+LazyStr = Annotated[str, PlainValidator(_validate_lazy_str)]
 
 
 class LinkConfig(BaseModel):
@@ -17,8 +29,8 @@ class PropertyConfig(BaseModel):
     """Configuration for a single property to display."""
 
     path: str
-    title: Optional[str] = None
-    detail: Optional[str] = None
+    title: Optional[LazyStr] = None
+    detail: Optional[LazyStr] = None
     type: Optional[str] = None
     template: Optional[str] = None
     link: Optional[LinkConfig] = None
@@ -34,8 +46,8 @@ class PropertyConfig(BaseModel):
 class PropertyGroupConfig(BaseModel):
     """Configuration for a group of properties."""
 
-    title: str
-    description: Optional[str] = None
+    title: LazyStr
+    description: Optional[LazyStr] = None
     icon: Optional[str] = None
     properties: list[PropertyConfig]
 
