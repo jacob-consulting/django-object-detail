@@ -6,9 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.1.6] - 2026-02-10
+
+### Fixed
+- Include templates in built package via `package-data` in pyproject.toml
+
 ### Added
 - Example application documentation in README and MkDocs
-
 
 ## [0.1.5] - 2026-02-10
 
@@ -37,5 +41,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Support for Django 4.2, 5.2, and 6.0
 - Support for Python 3.12 and 3.13
 
-[Unreleased]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.5...HEAD
+[Unreleased]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.6...HEAD
+[0.1.6]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.5...v0.1.6
+[0.1.5]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/jacob-consulting/django-object-detail/releases/tag/v0.1.4
