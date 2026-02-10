@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Annotated, Any, Optional
 
 from django.utils.functional import Promise
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, ConfigDict, field_validator
 from pydantic.functional_validators import PlainValidator
 
 
@@ -25,6 +25,18 @@ class LinkConfig(BaseModel):
     kwargs: Optional[dict[str, str]] = None
 
 
+class BadgeConfig(BaseModel):
+    """Configuration for rendering a property value as a Bootstrap badge."""
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    color: Optional[str] = None
+    color_map: Optional[dict] = None
+    color_fn: Optional[Any] = None
+    label_map: Optional[dict] = None
+    pill: bool = False
+
+
 class PropertyConfig(BaseModel):
     """Configuration for a single property to display."""
 
@@ -34,12 +46,20 @@ class PropertyConfig(BaseModel):
     type: Optional[str] = None
     template: Optional[str] = None
     link: Optional[LinkConfig] = None
+    badge: Optional[BadgeConfig] = None
 
     @field_validator("link", mode="before")
     @classmethod
     def normalize_link(cls, v):
         if isinstance(v, str):
             return LinkConfig(url=v)
+        return v
+
+    @field_validator("badge", mode="before")
+    @classmethod
+    def normalize_badge(cls, v):
+        if isinstance(v, str):
+            return BadgeConfig(color=v)
         return v
 
 

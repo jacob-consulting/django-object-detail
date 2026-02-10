@@ -55,7 +55,12 @@ def render_property_value(context, prop):
     Returns the rendered HTML string.
     """
     types_pack = get_types_pack()
-    if prop.template:
+    if prop.badge_css:
+        template_names = [
+            f"django_object_detail/types/{types_pack}/badge.html",
+            "django_object_detail/types/default/badge.html",
+        ]
+    elif prop.template:
         template_names = [prop.template]
     else:
         template_names = [

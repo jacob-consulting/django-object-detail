@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView
 
-from django_object_detail.config import x
+from django_object_detail.config import BadgeConfig, x
 from django_object_detail.views import ObjectDetailMixin
 
 from .models import Author, Book, Publisher
@@ -56,6 +56,13 @@ class BookDetailView(ObjectDetailMixin, DetailView):
                 x("pages", title="Page Count"),
                 "price",
                 x("rating", template="catalog/star_rating.html"),
+                x(
+                    "rating",
+                    title="Rating Badge",
+                    badge=BadgeConfig(
+                        color_fn=lambda r: "success" if r >= 4 else "warning" if r >= 2.5 else "danger",
+                    ),
+                ),
             ],
         },
         {
@@ -63,7 +70,14 @@ class BookDetailView(ObjectDetailMixin, DetailView):
             "icon": "cart-check",
             "description": "Stock and publication status",
             "properties": [
-                "is_available",
+                x(
+                    "is_available",
+                    badge=BadgeConfig(
+                        color_map={True: "success", False: "danger"},
+                        label_map={True: "In Stock", False: "Out of Stock"},
+                        pill=True,
+                    ),
+                ),
                 "publication_date",
             ],
         },
@@ -129,7 +143,15 @@ class AuthorDetailView(ObjectDetailMixin, DetailView):
                 "first_name",
                 "last_name",
                 x("get_full_name", title="Full Name"),
-                x("book_count", title="Number of Books", type="integer"),
+                x(
+                    "book_count",
+                    title="Number of Books",
+                    type="integer",
+                    badge=BadgeConfig(
+                        color_fn=lambda n: "success" if n >= 5 else "info" if n >= 1 else "secondary",
+                        pill=True,
+                    ),
+                ),
             ],
         },
         {
@@ -137,7 +159,13 @@ class AuthorDetailView(ObjectDetailMixin, DetailView):
             "icon": "calendar",
             "properties": [
                 "date_of_birth",
-                "is_featured",
+                x(
+                    "is_featured",
+                    badge=BadgeConfig(
+                        color_map={True: "primary", False: "secondary"},
+                        label_map={True: "Featured", False: "Standard"},
+                    ),
+                ),
                 "website",
             ],
         },
@@ -164,8 +192,13 @@ class PublisherDetailView(ObjectDetailMixin, DetailView):
             "properties": [
                 "name",
                 "website",
-                "is_active",
-                "founded_year",
+                x("is_active", badge="success"),
+                x(
+                    "founded_year",
+                    badge=BadgeConfig(
+                        color_fn=lambda y: "dark" if y < 1950 else "info" if y < 2000 else "light",
+                    ),
+                ),
                 x("years_in_business", title="Years in Business", type="integer"),
             ],
         },

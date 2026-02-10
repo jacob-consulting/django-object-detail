@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from pydantic import ValidationError
 
 from django_object_detail.config import (
+    BadgeConfig,
     LinkConfig,
     PropertyConfig,
     PropertyGroupConfig,
@@ -221,3 +222,61 @@ class TestLazyStringSupport:
     def test_invalid_type_rejected(self):
         with pytest.raises(ValidationError):
             PropertyConfig(path="title", title=123)
+
+
+class TestBadgeConfig:
+    def test_create_with_color(self):
+        bc = BadgeConfig(color="success")
+        assert bc.color == "success"
+        assert bc.color_map is None
+        assert bc.color_fn is None
+        assert bc.label_map is None
+        assert bc.pill is False
+
+    def test_create_with_color_map(self):
+        bc = BadgeConfig(color_map={True: "success", False: "danger"})
+        assert bc.color_map == {True: "success", False: "danger"}
+
+    def test_create_with_color_fn(self):
+        fn = lambda v: "success" if v else "danger"
+        bc = BadgeConfig(color_fn=fn)
+        assert bc.color_fn is fn
+
+    def test_create_with_label_map(self):
+        bc = BadgeConfig(color="info", label_map={True: "Yes", False: "No"})
+        assert bc.label_map == {True: "Yes", False: "No"}
+
+    def test_pill(self):
+        bc = BadgeConfig(color="primary", pill=True)
+        assert bc.pill is True
+
+    def test_string_normalization_on_property_config(self):
+        cfg = PropertyConfig(path="status", badge="success")
+        assert isinstance(cfg.badge, BadgeConfig)
+        assert cfg.badge.color == "success"
+        assert cfg.badge.pill is False
+
+    def test_x_with_badge_string(self):
+        cfg = x("status", badge="warning")
+        assert isinstance(cfg.badge, BadgeConfig)
+        assert cfg.badge.color == "warning"
+
+    def test_x_with_badge_config(self):
+        cfg = x("status", badge=BadgeConfig(color_map={True: "success"}, pill=True))
+        assert cfg.badge.color_map == {True: "success"}
+        assert cfg.badge.pill is True
+
+    def test_dict_normalization_via_group(self):
+        group = PropertyGroupConfig(
+            title="Test",
+            properties=[
+                {"path": "status", "badge": "info"},
+            ],
+        )
+        prop = group.properties[0]
+        assert isinstance(prop.badge, BadgeConfig)
+        assert prop.badge.color == "info"
+
+    def test_no_badge_default(self):
+        cfg = PropertyConfig(path="title")
+        assert cfg.badge is None

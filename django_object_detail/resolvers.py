@@ -7,7 +7,7 @@ from django.core.exceptions import FieldDoesNotExist
 from django.db import models
 from django.urls import NoReverseMatch, reverse
 
-from django_object_detail.config import LinkConfig, PropertyConfig, PropertyGroupConfig
+from django_object_detail.config import BadgeConfig, LinkConfig, PropertyConfig, PropertyGroupConfig
 
 FIELD_TYPE_MAP: dict[type[models.Field], str] = {
     models.CharField: "char",
@@ -49,6 +49,8 @@ class ResolvedProperty:
     template: str | None = None
     is_many: bool = False
     link_url: str | None = None
+    badge_css: str | None = None
+    badge_label: str | None = None
 
 
 @dataclass
@@ -85,6 +87,32 @@ def _resolve_link_url(value: Any, link: LinkConfig | None, is_many: bool) -> str
             return None
     except (NoReverseMatch, AttributeError):
         return None
+
+
+def _resolve_badge_css(value: Any, badge: BadgeConfig) -> str | None:
+    """Compute Bootstrap badge CSS classes from config and value."""
+    if value is None:
+        return None
+    color = None
+    if badge.color_fn:
+        color = badge.color_fn(value)
+    elif badge.color_map:
+        color = badge.color_map.get(value)
+    else:
+        color = badge.color
+    if color is None:
+        return None
+    css = f"text-bg-{color}"
+    if badge.pill:
+        css += " rounded-pill"
+    return css
+
+
+def _resolve_badge_label(value: Any, badge: BadgeConfig) -> str | None:
+    """Compute badge display label from config and value."""
+    if value is None or badge.label_map is None:
+        return None
+    return badge.label_map.get(value)
 
 
 def resolve_property(instance: models.Model, config: PropertyConfig) -> ResolvedProperty:
@@ -149,6 +177,13 @@ def resolve_property(instance: models.Model, config: PropertyConfig) -> Resolved
     # Resolve link URL
     link_url = _resolve_link_url(value, config.link, is_many)
 
+    # Resolve badge
+    badge_css = None
+    badge_label = None
+    if config.badge:
+        badge_css = _resolve_badge_css(value, config.badge)
+        badge_label = _resolve_badge_label(value, config.badge)
+
     return ResolvedProperty(
         path=config.path,
         label=label,
@@ -158,6 +193,8 @@ def resolve_property(instance: models.Model, config: PropertyConfig) -> Resolved
         template=config.template,
         is_many=is_many,
         link_url=link_url,
+        badge_css=badge_css,
+        badge_label=badge_label,
     )
 
 

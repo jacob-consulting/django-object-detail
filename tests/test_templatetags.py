@@ -244,3 +244,63 @@ class TestRenderPropertyLink:
         anchor_html = html[anchor_start:anchor_end]
         assert "Owner" not in anchor_html
         assert "testuser" in anchor_html
+
+
+class TestRenderPropertyBadge:
+    def test_badge_renders_with_value(self):
+        prop = ResolvedProperty(
+            path="t", label="Status", value="Active", type="char",
+            badge_css="text-bg-success",
+        )
+        tpl = Template(
+            "{% load object_detail %}{% render_property_value prop %}"
+        )
+        html = tpl.render(Context({"prop": prop}))
+        assert '<span class="badge text-bg-success">' in html
+        assert "Active" in html
+
+    def test_badge_renders_with_label(self):
+        prop = ResolvedProperty(
+            path="t", label="Status", value=True, type="boolean",
+            badge_css="text-bg-success", badge_label="Yes",
+        )
+        tpl = Template(
+            "{% load object_detail %}{% render_property_value prop %}"
+        )
+        html = tpl.render(Context({"prop": prop}))
+        assert '<span class="badge text-bg-success">' in html
+        assert "Yes" in html
+
+    def test_badge_pill(self):
+        prop = ResolvedProperty(
+            path="t", label="Status", value="OK", type="char",
+            badge_css="text-bg-primary rounded-pill",
+        )
+        tpl = Template(
+            "{% load object_detail %}{% render_property_value prop %}"
+        )
+        html = tpl.render(Context({"prop": prop}))
+        assert "rounded-pill" in html
+
+    def test_badge_null_value_shows_dash(self):
+        prop = ResolvedProperty(
+            path="t", label="Status", value=None, type="char",
+            badge_css="text-bg-success",
+        )
+        tpl = Template(
+            "{% load object_detail %}{% render_property_value prop %}"
+        )
+        html = tpl.render(Context({"prop": prop}))
+        assert "&mdash;" in html or "\u2014" in html
+        assert "badge" not in html
+
+    def test_badge_no_css_uses_type_template(self):
+        prop = ResolvedProperty(
+            path="t", label="Status", value=True, type="boolean",
+        )
+        tpl = Template(
+            "{% load object_detail %}{% render_property_value prop %}"
+        )
+        html = tpl.render(Context({"prop": prop}))
+        assert "badge" not in html
+        assert "check-circle-fill" in html

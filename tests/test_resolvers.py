@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.utils.functional import Promise
 from django.utils.translation import gettext_lazy as _
 
-from django_object_detail.config import LinkConfig, PropertyConfig, PropertyGroupConfig, x
+from django_object_detail.config import BadgeConfig, LinkConfig, PropertyConfig, PropertyGroupConfig, x
 from django_object_detail.resolvers import (
     ResolvedGroup,
     ResolvedProperty,
@@ -308,3 +308,81 @@ class TestLazyStringResolution:
         assert isinstance(rg.description, Promise)
         assert str(rg.title) == "Report Info"
         assert str(rg.description) == "Details about the report"
+
+
+class TestResolvePropertyBadge:
+    def test_fixed_color(self, report):
+        cfg = x("info__is_public", badge=BadgeConfig(color="success"))
+        rp = resolve_property(report, cfg)
+        assert rp.badge_css == "text-bg-success"
+        assert rp.badge_label is None
+
+    def test_color_map(self, report):
+        cfg = x("info__is_public", badge=BadgeConfig(color_map={True: "success", False: "danger"}))
+        rp = resolve_property(report, cfg)
+        assert rp.badge_css == "text-bg-success"
+
+    def test_color_fn(self, report):
+        fn = lambda v: "success" if v else "danger"
+        cfg = x("info__is_public", badge=BadgeConfig(color_fn=fn))
+        rp = resolve_property(report, cfg)
+        assert rp.badge_css == "text-bg-success"
+
+    def test_color_fn_takes_priority(self, report):
+        """color_fn should take priority over color_map and color."""
+        cfg = x(
+            "info__is_public",
+            badge=BadgeConfig(color="primary", color_map={True: "warning"}, color_fn=lambda v: "info"),
+        )
+        rp = resolve_property(report, cfg)
+        assert rp.badge_css == "text-bg-info"
+
+    def test_color_map_takes_priority_over_fixed(self, report):
+        cfg = x(
+            "info__is_public",
+            badge=BadgeConfig(color="primary", color_map={True: "warning"}),
+        )
+        rp = resolve_property(report, cfg)
+        assert rp.badge_css == "text-bg-warning"
+
+    def test_pill(self, report):
+        cfg = x("info__is_public", badge=BadgeConfig(color="success", pill=True))
+        rp = resolve_property(report, cfg)
+        assert rp.badge_css == "text-bg-success rounded-pill"
+
+    def test_label_map(self, report):
+        cfg = x(
+            "info__is_public",
+            badge=BadgeConfig(color="success", label_map={True: "Active", False: "Inactive"}),
+        )
+        rp = resolve_property(report, cfg)
+        assert rp.badge_label == "Active"
+
+    def test_label_map_no_match(self, report):
+        cfg = x("info__is_public", badge=BadgeConfig(color="success", label_map={"other": "Label"}))
+        rp = resolve_property(report, cfg)
+        assert rp.badge_label is None
+
+    def test_null_value_returns_none(self, db):
+        report = Report.objects.create(title="No info", owner=None, info=None)
+        cfg = x("owner", badge=BadgeConfig(color="success"))
+        rp = resolve_property(report, cfg)
+        assert rp.badge_css is None
+        assert rp.badge_label is None
+
+    def test_no_badge_config(self, report):
+        cfg = PropertyConfig(path="title")
+        rp = resolve_property(report, cfg)
+        assert rp.badge_css is None
+        assert rp.badge_label is None
+
+    def test_string_shorthand(self, report):
+        cfg = x("info__is_public", badge="success")
+        rp = resolve_property(report, cfg)
+        assert rp.badge_css == "text-bg-success"
+
+    def test_color_map_value_not_in_map(self, report):
+        """When the value isn't in color_map, badge_css should be None."""
+        cfg = x("info__is_public", badge=BadgeConfig(color_map={"other": "success"}))
+        rp = resolve_property(report, cfg)
+        assert rp.badge_css is None
