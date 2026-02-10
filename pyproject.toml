@@ -46,6 +46,9 @@ docs = [
 [tool.setuptools.packages.find]
 include = ["django_object_detail*"]
 
+[tool.setuptools.package-data]
+django_object_detail = ["templates/**/*"]
+
 [build-system]
 requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
