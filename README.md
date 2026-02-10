@@ -1,5 +1,8 @@
 # django-object-detail
 
+![Tests](https://github.com/jacob-consulting/django-object-detail/actions/workflows/tests.yml/badge.svg)
+![Coverage](https://codecov.io/gh/jacob-consulting/django-object-detail/branch/main/graph/badge.svg)
+
 Display Django model instances in grouped, Bootstrap 5 layouts with a declarative configuration.
 
 Define which fields to show, how to group them, and pick a layout — `django-object-detail` handles type detection, value resolution (including FK/M2M traversal), and rendering.

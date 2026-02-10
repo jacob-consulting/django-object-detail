@@ -12,6 +12,7 @@ dependencies = [
 dev = [
     "nox",
     "pytest",
+    "pytest-cov",
     "pytest-django",
 ]
 docs = [
