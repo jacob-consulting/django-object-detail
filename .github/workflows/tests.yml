@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install nox
-      - run: nox -s tests-${{ matrix.python-version }} -- --cov-report=xml
+      - run: nox -s "tests-${{ matrix.python-version }}(django='4.2')" "tests-${{ matrix.python-version }}(django='5.2')" "tests-${{ matrix.python-version }}(django='6.0')" -- --cov-report=xml
       - uses: codecov/codecov-action@v5
         if: matrix.python-version == '3.13'
         with:
