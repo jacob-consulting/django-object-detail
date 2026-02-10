@@ -27,7 +27,7 @@ Homepage = "https://github.com/jacob-consulting/django-object-detail"
 Documentation = "https://django-object-detail.readthedocs.io/"
 Repository = "https://github.com/jacob-consulting/django-object-detail"
 Issues = "https://github.com/jacob-consulting/django-object-detail/issues"
-Changelog = "https://github.com/jacob-consulting/django-object-detail/releases"
+Changelog = "https://github.com/jacob-consulting/django-object-detail/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 dev = [
