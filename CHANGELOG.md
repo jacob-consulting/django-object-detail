@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased]
+
+### Added
+- Example application documentation in README and MkDocs
+
+
+## [0.1.5] - 2026-02-10
+
+### Added
+- Python 3.14 support
+- MIT license and PyPI classifiers
+- Project URLs in package metadata
+- PyPI version, license, and ReadTheDocs badges to README
+- PyPI publish workflow on tagged pushes
+- Coverage reporting with Codecov integration
+- Multi-version Django testing (4.2, 5.2, 6.0) in CI
+
 ## [0.1.4] - 2026-02-10
 
 ### Added
@@ -20,4 +37,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Support for Django 4.2, 5.2, and 6.0
 - Support for Python 3.12 and 3.13
 
+[Unreleased]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.5...HEAD
 [0.1.4]: https://github.com/jacob-consulting/django-object-detail/releases/tag/v0.1.4
