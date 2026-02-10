@@ -67,5 +67,4 @@ STATIC_URL = "static/"
 
 # django-object-detail template packs
 OBJECT_DETAIL_TEMPLATE_PACK_LAYOUT = "split-card"
-OBJECT_DETAIL_TEMPLATE_PACK_LAYOUT = "tabs-vertical"
 OBJECT_DETAIL_TEMPLATE_PACK_TYPES = "default"
