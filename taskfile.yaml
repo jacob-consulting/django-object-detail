@@ -12,6 +12,11 @@ tasks:
       - mkdocs serve -a localhost:8001
     silent: true
 
+  bump-patch:
+    cmds:
+      - bump-my-version bump patch
+    silent: true
+
   cleanup:
     cmds:
       - find . -type d -name "__pycache__" -exec rm -r {} +
