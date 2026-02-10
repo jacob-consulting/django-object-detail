@@ -101,6 +101,6 @@ the following template folder structure is used:
   - group.html
 
   For the layout there are drafts
-- [object-detail-drafts-1.html](templates/object-detail-drafts-1.html)
-- [object-detail-drafts-2.html](templates/object-detail-drafts-2.html)
+- [object-detail-drafts-1.html](../templates/object-detail-drafts-1.html)
+- [object-detail-drafts-2.html](../templates/object-detail-drafts-2.html)
 

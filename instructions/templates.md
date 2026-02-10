@@ -33,8 +33,8 @@ Make the templates use the template pack configuration when rendering.
 # Templates pack
 
 Here are the layouts 
-- [object-detail-drafts-1.html](templates/object-detail-drafts-1.html)
-- [object-detail-drafts-2.html](templates/object-detail-drafts-2.html)
+- [object-detail-drafts-1.html](../templates/object-detail-drafts-1.html)
+- [object-detail-drafts-2.html](../templates/object-detail-drafts-2.html)
 
 The one currently implemented is "Object Detail Layouts — Part 2 / 5 Split Card — Left Header / Right Properties".
 Rename it to a reasonable name and use this name as default for the configuration.
