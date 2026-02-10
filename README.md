@@ -71,6 +71,23 @@ Render it in your template:
 {% render_object_detail object object_detail_groups %}
 ```
 
+## Example Application
+
+The repository includes a full example bookshop application demonstrating all features.
+
+```bash
+cd example
+python -m venv venv
+source venv/bin/activate
+pip install django django-bootstrap5
+pip install -e ..
+python manage.py migrate
+python manage.py loaddata catalog
+python manage.py runserver
+```
+
+Then visit [http://localhost:8000](http://localhost:8000) to browse books, authors, and publishers with different detail layouts.
+
 ## Documentation
 
 Full documentation is available at [Read the Docs](https://django-object-detail.readthedocs.io/).

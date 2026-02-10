@@ -57,3 +57,4 @@ That's it — fields are auto-detected, labels are derived from `verbose_name`, 
 - [Links](getting_started/links.md) — make property values clickable
 - [Badges](getting_started/badges.md) — render values as Bootstrap badges
 - [Layout Packs](getting_started/layout_packs.md) — choose from 7 built-in layouts
+- [Example Application](getting_started/example.md) — run the demo bookshop app
