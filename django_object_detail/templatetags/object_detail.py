@@ -2,7 +2,12 @@ from django import template
 from django.template.loader import select_template
 from django.utils.safestring import mark_safe
 
-from django_object_detail.conf import get_layout_pack, get_types_pack
+from django_object_detail.conf import (
+    build_icon_class,
+    build_named_icon_class,
+    get_layout_pack,
+    get_types_pack,
+)
 from django_object_detail.config import parse_property_display
 from django_object_detail.resolvers import ResolvedGroup, resolve_all
 
@@ -71,3 +76,15 @@ def render_property_value(context, prop):
 
     tpl = select_template(template_names)
     return tpl.render({"prop": prop, "value": prop.value}, context.get("request"))
+
+
+@register.filter
+def icon_class(icon_name):
+    """Return the full CSS class string for an icon name."""
+    return build_icon_class(icon_name)
+
+
+@register.filter
+def named_icon_class(name):
+    """Return the full CSS class string for a named icon."""
+    return build_named_icon_class(name)

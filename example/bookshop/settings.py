@@ -68,3 +68,10 @@ STATIC_URL = "static/"
 # django-object-detail template packs
 OBJECT_DETAIL_TEMPLATE_PACK_LAYOUT = "split-card"
 OBJECT_DETAIL_TEMPLATE_PACK_TYPES = "default"
+
+# django-object-detail icon library
+# Options: "bootstrap" (default), "fontawesome"
+OBJECT_DETAIL_ICONS_LIBRARY = "bootstrap"
+# To use Font Awesome instead, uncomment:
+#OBJECT_DETAIL_ICONS_LIBRARY = "fontawesome"
+#OBJECT_DETAIL_ICONS_TYPE = "solid"  # or "regular", "light", "thin", "duotone"

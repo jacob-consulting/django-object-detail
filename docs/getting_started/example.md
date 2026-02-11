@@ -56,6 +56,31 @@ Then visit [http://localhost:8000](http://localhost:8000).
 | `/publishers/` | Publisher list |
 | `/publishers/<id>/` | Publisher detail — 3 property groups |
 
+## Switching to Font Awesome icons
+
+The example app ships with Bootstrap Icons by default. To switch to Font Awesome, edit `bookshop/settings.py`:
+
+```python
+OBJECT_DETAIL_ICONS_LIBRARY = "fontawesome"
+OBJECT_DETAIL_ICONS_TYPE = "solid"
+```
+
+The `"solid"` type is included in Font Awesome's free tier. Other types (`"regular"`, `"light"`, `"thin"`, `"duotone"`) require a Font Awesome Pro license.
+
+The example views in `catalog/views.py` automatically select the correct icon names for the active library — no view changes needed.
+
+You also need to load the Font Awesome stylesheet in your base template instead of (or in addition to) Bootstrap Icons. For example, replace:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+```
+
+with:
+
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+```
+
 ## Key files
 
 | File | Description |

@@ -1,9 +1,31 @@
 from django.views.generic import DetailView, ListView
 
+from django_object_detail.conf import get_icons_library
 from django_object_detail.config import BadgeConfig, x
 from django_object_detail.views import ObjectDetailMixin
 
 from .models import Author, Book, Publisher
+
+_FA_ICONS = {
+    "book": "book",
+    "cart-check": "cart-shopping",
+    "building": "building",
+    "geo-alt": "location-dot",
+    "people": "users",
+    "tags": "tags",
+    "gear": "gear",
+    "person": "user",
+    "calendar": "calendar",
+    "journal-text": "file-lines",
+    "info-circle": "circle-info",
+}
+
+
+def _icon(name):
+    """Return the icon name for the active library."""
+    if get_icons_library() == "fontawesome":
+        return _FA_ICONS.get(name, name)
+    return name
 
 
 class HomeView(ListView):
@@ -49,7 +71,7 @@ class BookDetailView(ObjectDetailMixin, DetailView):
     property_display = [
         {
             "title": "Basic Info",
-            "icon": "book",
+            "icon": _icon("book"),
             "description": "Core book details",
             "properties": [
                 "title",
@@ -67,7 +89,7 @@ class BookDetailView(ObjectDetailMixin, DetailView):
         },
         {
             "title": "Availability",
-            "icon": "cart-check",
+            "icon": _icon("cart-check"),
             "description": "Stock and publication status",
             "properties": [
                 x(
@@ -83,7 +105,7 @@ class BookDetailView(ObjectDetailMixin, DetailView):
         },
         {
             "title": "Publisher",
-            "icon": "building",
+            "icon": _icon("building"),
             "description": "Publishing house details",
             "properties": [
                 x("publisher", link="publisher-detail"),
@@ -93,7 +115,7 @@ class BookDetailView(ObjectDetailMixin, DetailView):
         },
         {
             "title": "Publisher Location",
-            "icon": "geo-alt",
+            "icon": _icon("geo-alt"),
             "description": "Publisher address via FK→O2O traversal",
             "properties": [
                 x("publisher__address__street", title="Street"),
@@ -103,7 +125,7 @@ class BookDetailView(ObjectDetailMixin, DetailView):
         },
         {
             "title": "Authors",
-            "icon": "people",
+            "icon": _icon("people"),
             "description": "All authors of this book",
             "properties": [
                 "authors",
@@ -111,7 +133,7 @@ class BookDetailView(ObjectDetailMixin, DetailView):
         },
         {
             "title": "Genres",
-            "icon": "tags",
+            "icon": _icon("tags"),
             "description": "Book categories",
             "properties": [
                 "genres",
@@ -119,7 +141,7 @@ class BookDetailView(ObjectDetailMixin, DetailView):
         },
         {
             "title": "Methods & Computed",
-            "icon": "gear",
+            "icon": _icon("gear"),
             "description": "Values computed from model methods",
             "properties": [
                 x("title_upper", title="Title (uppercase)"),
@@ -137,7 +159,7 @@ class AuthorDetailView(ObjectDetailMixin, DetailView):
     property_display = [
         {
             "title": "Identity",
-            "icon": "person",
+            "icon": _icon("person"),
             "description": "Personal information",
             "properties": [
                 "first_name",
@@ -156,7 +178,7 @@ class AuthorDetailView(ObjectDetailMixin, DetailView):
         },
         {
             "title": "Dates & Status",
-            "icon": "calendar",
+            "icon": _icon("calendar"),
             "properties": [
                 "date_of_birth",
                 x(
@@ -171,7 +193,7 @@ class AuthorDetailView(ObjectDetailMixin, DetailView):
         },
         {
             "title": "Biography",
-            "icon": "journal-text",
+            "icon": _icon("journal-text"),
             "properties": [
                 "biography",
             ],
@@ -187,7 +209,7 @@ class PublisherDetailView(ObjectDetailMixin, DetailView):
     property_display = [
         {
             "title": "Company Info",
-            "icon": "building",
+            "icon": _icon("building"),
             "description": "Publisher details",
             "properties": [
                 "name",
@@ -204,7 +226,7 @@ class PublisherDetailView(ObjectDetailMixin, DetailView):
         },
         {
             "title": "Address",
-            "icon": "geo-alt",
+            "icon": _icon("geo-alt"),
             "description": "Office location via reverse O2O",
             "properties": [
                 x("address__street", title="Street"),
@@ -214,7 +236,7 @@ class PublisherDetailView(ObjectDetailMixin, DetailView):
         },
         {
             "title": "About",
-            "icon": "info-circle",
+            "icon": _icon("info-circle"),
             "properties": [
                 "description",
             ],

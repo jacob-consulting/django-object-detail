@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.1.7] - 2026-02-11
+
+### Added
+- Configurable icon library support (Bootstrap Icons, Font Awesome, or custom)
+- New settings: `OBJECT_DETAIL_ICONS_LIBRARY`, `OBJECT_DETAIL_ICONS_CLASS`, `OBJECT_DETAIL_ICONS_TYPE`, `OBJECT_DETAIL_ICONS_PREFIX`, `OBJECT_DETAIL_NAMED_ICONS`
+- Template filters `icon_class` and `named_icon_class` for dynamic icon CSS class generation
+- Named icon defaults for both Bootstrap Icons and Font Awesome
+- Icon library documentation in settings reference and example app guide
+- Example app support for switching between Bootstrap Icons and Font Awesome
+
+### Changed
+- Templates now use `icon_class` / `named_icon_class` filters instead of hardcoded `bi bi-*` classes
+
 ## [0.1.6] - 2026-02-10
 
 ### Fixed
@@ -41,7 +54,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Support for Django 4.2, 5.2, and 6.0
 - Support for Python 3.12 and 3.13
 
-[Unreleased]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.6...HEAD
+[Unreleased]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.7...HEAD
+[0.1.7]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/jacob-consulting/django-object-detail/releases/tag/v0.1.4
