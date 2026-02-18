@@ -75,6 +75,7 @@ class BookDetailView(ObjectDetailMixin, DetailView):
             "description": "Core book details",
             "properties": [
                 "title",
+                "summary",
                 x("pages", title="Page Count"),
                 "price",
                 x("rating", template="catalog/star_rating.html"),

@@ -14,10 +14,6 @@
 
 <h1 class="mb-4">{{ book.title }}</h1>
 
-{% if book.summary %}
-<p class="lead mb-4">{{ book.summary }}</p>
-{% endif %}
-
 {% render_object_detail book groups=object_detail_groups %}
 
 <a href="{% url 'book-list' %}" class="btn btn-outline-secondary mt-2">
