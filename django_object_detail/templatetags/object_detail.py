@@ -6,6 +6,7 @@ from django_object_detail.conf import (
     build_icon_class,
     build_named_icon_class,
     get_layout_pack,
+    get_property_text_newline,
     get_types_pack,
 )
 from django_object_detail.config import parse_property_display
@@ -75,7 +76,10 @@ def render_property_value(context, prop):
         ]
 
     tpl = select_template(template_names)
-    return tpl.render({"prop": prop, "value": prop.value}, context.get("request"))
+    od_settings = {
+        "property_text_newline": get_property_text_newline(),
+    }
+    return tpl.render({"prop": prop, "value": prop.value, "od_settings": od_settings}, context.get("request"))
 
 
 @register.filter

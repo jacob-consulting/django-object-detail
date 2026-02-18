@@ -89,6 +89,10 @@ def build_icon_class(icon_name):
     return f"{base} {prefix}-{icon_name}"
 
 
+def get_property_text_newline():
+    return getattr(settings, "OBJECT_DETAIL_PROPERTY_TEXT_NEWLINE", "linebreaksbr")
+
+
 def build_named_icon_class(name):
     """Resolve a named icon and return the full CSS class string."""
     named_icons = get_named_icons()

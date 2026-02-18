@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.1.8] - 2026-02-18
+
+### Added
+- `OBJECT_DETAIL_PROPERTY_TEXT_NEWLINE` setting to control how newlines in text fields are rendered (`"linebreaksbr"` default, or `"linebreaks"` for paragraph wrapping)
+- Library settings (`od_settings`) injected into type template context via `render_property_value`
+
 ## [0.1.7] - 2026-02-11
 
 ### Added
@@ -54,7 +60,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Support for Django 4.2, 5.2, and 6.0
 - Support for Python 3.12 and 3.13
 
-[Unreleased]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.7...HEAD
+[Unreleased]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.8...HEAD
+[0.1.8]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.4...v0.1.5

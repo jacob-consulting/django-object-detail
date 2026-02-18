@@ -1,1 +1,1 @@
-{% if value is None %}<span class="text-body-tertiary">&mdash;</span>{% else %}{{ value|linebreaksbr }}{% endif %}
+{% if value is None %}<span class="text-body-tertiary">&mdash;</span>{% elif od_settings.property_text_newline == "linebreaks" %}{{ value|linebreaks }}{% else %}{{ value|linebreaksbr }}{% endif %}

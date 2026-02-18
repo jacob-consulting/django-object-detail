@@ -1,5 +1,6 @@
 import pytest
 from django.template import Template, Context
+from django.test import override_settings
 from django.utils import timezone
 
 from django_object_detail.config import x
@@ -202,6 +203,26 @@ class TestRenderPropertyValue:
         )
         html = tpl.render(Context({"prop": prop}))
         assert "anything" in html
+
+
+class TestRenderPropertyValueText:
+    def test_text_default_linebreaksbr(self):
+        prop = ResolvedProperty(path="t", label="T", value="line1\nline2", type="text")
+        tpl = Template(
+            "{% load object_detail %}{% render_property_value prop %}"
+        )
+        html = tpl.render(Context({"prop": prop}))
+        assert "<br>" in html
+        assert "<p>" not in html
+
+    @override_settings(OBJECT_DETAIL_PROPERTY_TEXT_NEWLINE="linebreaks")
+    def test_text_linebreaks_setting(self):
+        prop = ResolvedProperty(path="t", label="T", value="line1\nline2", type="text")
+        tpl = Template(
+            "{% load object_detail %}{% render_property_value prop %}"
+        )
+        html = tpl.render(Context({"prop": prop}))
+        assert "<p>" in html
 
 
 class TestRenderPropertyLink:

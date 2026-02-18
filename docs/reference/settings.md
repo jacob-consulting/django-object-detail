@@ -9,6 +9,7 @@
 | `OBJECT_DETAIL_ICONS_TYPE` | per library | Icon type/family. `None` for Bootstrap, `"regular"` for Font Awesome |
 | `OBJECT_DETAIL_ICONS_PREFIX` | per library | Icon name prefix (`"bi"` for Bootstrap, `"fa"` for Font Awesome) |
 | `OBJECT_DETAIL_NAMED_ICONS` | per library | Dict mapping named icons to icon names (see below) |
+| `OBJECT_DETAIL_PROPERTY_TEXT_NEWLINE` | `"linebreaksbr"` | How newlines in `TextField` values are rendered. `"linebreaksbr"` converts newlines to `<br>`, `"linebreaks"` wraps paragraphs in `<p>` tags |
 
 ## Icon libraries
 
