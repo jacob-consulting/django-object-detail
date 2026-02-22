@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.1.9] - 2026-02-22
+
+### Changed
+- Icon text color in group display changed from `text-primary` to default
+
 ## [0.1.8] - 2026-02-18
 
 ### Added
@@ -60,7 +65,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Support for Django 4.2, 5.2, and 6.0
 - Support for Python 3.12 and 3.13
 
-[Unreleased]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.8...HEAD
+[Unreleased]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.9...HEAD
+[0.1.9]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.8...v0.1.9
 [0.1.8]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/jacob-consulting/django-object-detail/compare/v0.1.5...v0.1.6
