@@ -8,3 +8,4 @@ __pycache__/
 .coverage
 site/
 uv.lock
+build/
