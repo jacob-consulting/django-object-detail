@@ -24,7 +24,8 @@ def render_object_detail(context, obj, groups=None, property_display=None):
     """
     if groups is None and property_display is not None:
         configs = parse_property_display(property_display)
-        groups = resolve_all(obj, configs)
+        view = context.get("view")
+        groups = resolve_all(obj, configs, view=view)
 
     pack = get_layout_pack()
     tpl = select_template([

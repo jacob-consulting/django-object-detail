@@ -9,6 +9,8 @@ from django.urls import NoReverseMatch, reverse
 
 from django_object_detail.config import BadgeConfig, LinkConfig, PropertyConfig, PropertyGroupConfig
 
+_MISSING = object()
+
 FIELD_TYPE_MAP: dict[type[models.Field], str] = {
     models.CharField: "char",
     models.SlugField: "char",
@@ -115,7 +117,7 @@ def _resolve_badge_label(value: Any, badge: BadgeConfig) -> str | None:
     return badge.label_map.get(value)
 
 
-def resolve_property(instance: models.Model, config: PropertyConfig) -> ResolvedProperty:
+def resolve_property(instance: models.Model, config: PropertyConfig, view=None) -> ResolvedProperty:
     """Resolve a PropertyConfig against a model instance.
 
     Walks the _meta chain for metadata (label, detail, type)
@@ -174,6 +176,10 @@ def resolve_property(instance: models.Model, config: PropertyConfig) -> Resolved
     # Resolve the runtime value
     value = _resolve_value(instance, segments, is_many)
 
+    if value is _MISSING:
+        view_method = getattr(view, config.path, None) if view is not None else None
+        value = view_method(instance) if callable(view_method) else None
+
     # Resolve link URL
     link_url = _resolve_link_url(value, config.link, is_many)
 
@@ -202,17 +208,25 @@ def _resolve_value(instance: models.Model, segments: list[str], is_many: bool) -
     """Walk the instance to resolve the runtime value.
 
     Tracks a list of current objects to handle M2M fan-out.
+    Returns _MISSING if the first segment is not found on the instance.
     """
     current: list[Any] = [instance]
+    first_resolved = False
 
-    for segment in segments:
+    for i, segment in enumerate(segments):
         next_objects: list[Any] = []
         for obj in current:
             if obj is None:
                 next_objects.append(None)
                 continue
 
-            attr = getattr(obj, segment, None)
+            attr = getattr(obj, segment, _MISSING)
+
+            if attr is _MISSING:
+                continue
+
+            if i == 0:
+                first_resolved = True
 
             # Check if it's a manager (M2M or reverse FK)
             if hasattr(attr, "all"):
@@ -224,6 +238,9 @@ def _resolve_value(instance: models.Model, segments: list[str], is_many: bool) -
 
         current = next_objects
 
+    if not first_resolved:
+        return _MISSING
+
     if is_many:
         return current
     elif len(current) == 1:
@@ -232,18 +249,18 @@ def _resolve_value(instance: models.Model, segments: list[str], is_many: bool) -
         return current
 
 
-def resolve_group(instance: models.Model, config: PropertyGroupConfig) -> ResolvedGroup:
+def resolve_group(instance: models.Model, config: PropertyGroupConfig, view=None) -> ResolvedGroup:
     """Resolve all properties in a group."""
     return ResolvedGroup(
         title=config.title,
         description=config.description,
         icon=config.icon,
-        properties=[resolve_property(instance, prop) for prop in config.properties],
+        properties=[resolve_property(instance, prop, view=view) for prop in config.properties],
     )
 
 
 def resolve_all(
-    instance: models.Model, groups: list[PropertyGroupConfig]
+    instance: models.Model, groups: list[PropertyGroupConfig], view=None
 ) -> list[ResolvedGroup]:
     """Resolve all groups for an instance."""
-    return [resolve_group(instance, group) for group in groups]
+    return [resolve_group(instance, group, view=view) for group in groups]

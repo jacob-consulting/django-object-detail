@@ -386,3 +386,48 @@ class TestResolvePropertyBadge:
         cfg = x("info__is_public", badge=BadgeConfig(color_map={"other": "success"}))
         rp = resolve_property(report, cfg)
         assert rp.badge_css is None
+
+
+class TestResolvePropertyViewFallback:
+    def test_view_callable_used_when_path_missing_on_model(self, report):
+        class MockView:
+            def my_method(self, instance):
+                return "view-computed"
+
+        cfg = x("my_method")
+        rp = resolve_property(report, cfg, view=MockView())
+        assert rp.value == "view-computed"
+
+    def test_model_takes_priority_over_view(self, report):
+        class MockView:
+            def title(self, instance):
+                return "view title"
+
+        cfg = x("title")
+        rp = resolve_property(report, cfg, view=MockView())
+        assert rp.value == "Test Report"
+
+    def test_view_non_callable_attribute_returns_none(self, report):
+        class MockView:
+            my_attr = "string"
+
+        cfg = x("my_attr")
+        rp = resolve_property(report, cfg, view=MockView())
+        assert rp.value is None
+
+    def test_no_view_returns_none_when_path_missing(self, report):
+        cfg = x("nonexistent_path")
+        rp = resolve_property(report, cfg)
+        assert rp.value is None
+
+    def test_view_method_receives_instance(self, report):
+        received = []
+
+        class MockView:
+            def my_method(self, instance):
+                received.append(instance)
+                return "ok"
+
+        cfg = x("my_method")
+        resolve_property(report, cfg, view=MockView())
+        assert received == [report]

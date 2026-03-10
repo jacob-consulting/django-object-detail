@@ -84,3 +84,31 @@ class TestObjectDetailMixin:
         view.kwargs = {"pk": report.pk}
         context = view.get_context_data()
         assert "object_detail_groups" not in context
+
+
+class ReportDetailViewWithViewMethod(ObjectDetailMixin, DetailView):
+    model = Report
+    template_name = "django_object_detail/object_detail.html"
+    property_display = [
+        {
+            "title": "Computed",
+            "properties": [
+                x("view_computed_value"),
+            ],
+        }
+    ]
+
+    def view_computed_value(self, instance):
+        return f"computed:{instance.title}"
+
+
+class TestObjectDetailMixinViewFallback:
+    def test_view_method_value_resolved(self, report, factory):
+        request = factory.get(f"/reports/{report.pk}/")
+        view = ReportDetailViewWithViewMethod()
+        view.request = request
+        view.object = report
+        view.kwargs = {"pk": report.pk}
+        context = view.get_context_data()
+        groups = context["object_detail_groups"]
+        assert groups[0].properties[0].value == f"computed:{report.title}"

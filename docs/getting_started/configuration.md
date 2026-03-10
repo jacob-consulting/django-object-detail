@@ -67,3 +67,31 @@ property_display = [
 | `properties`  | List of strings, dicts, or `PropertyConfig` objects |
 
 Properties can be mixed freely — plain strings, dicts with `PropertyConfig` fields, or `x()` / `PropertyConfig` instances.
+
+## View-Callable Fallback
+
+If a `path` cannot be resolved on the model instance (the first segment is not an attribute or method on the instance), the resolver will try to call `view.<path>(instance)` instead.
+
+This lets you compute display values using view-level context (e.g. `self.request`, view kwargs, or logic that doesn't belong on the model):
+
+```python
+class BookDetailView(ObjectDetailMixin, DetailView):
+    model = Book
+    property_display = [
+        {
+            "title": "View-Computed",
+            "properties": [
+                x("view_computed_summary", title="Summary"),
+            ],
+        },
+    ]
+
+    def view_computed_summary(self, instance):
+        return f"{instance.title} by {instance.author_list()} ({instance.pages} pages)"
+```
+
+**Rules:**
+
+- The view method must be callable — non-callable attributes on the view are ignored (value becomes `None`)
+- If the path **is** found on the model (even as `None`), the view fallback never runs — model always takes priority
+- This works automatically when using `ObjectDetailMixin`, or when using the `{% render_object_detail %}` template tag from within a Django CBV template (Django adds `view` to context via `ContextMixin`)

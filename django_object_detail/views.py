@@ -32,5 +32,5 @@ class ObjectDetailMixin:
         groups = self.get_property_display()
         if groups:
             instance = self.get_object_for_detail()
-            context["object_detail_groups"] = resolve_all(instance, groups)
+            context["object_detail_groups"] = resolve_all(instance, groups, view=self)
         return context

@@ -149,7 +149,18 @@ class BookDetailView(ObjectDetailMixin, DetailView):
                 x("author_list", title="Author List (comma-separated)"),
             ],
         },
+        {
+            "title": "View-Computed",
+            "icon": _icon("info-circle"),
+            "description": "Value computed in the view, not the model",
+            "properties": [
+                x("view_computed_summary", title="Summary"),
+            ],
+        },
     ]
+
+    def view_computed_summary(self, instance):
+        return f"{instance.title} by {instance.author_list()} ({instance.pages} pages)"
 
 
 class AuthorDetailView(ObjectDetailMixin, DetailView):
